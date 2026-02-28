@@ -2,73 +2,136 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>GENESIS | The Prism</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENESIS | Your Vision, Refracted into Reality.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&family=Noto+Serif+JP:wght@200;400&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; background-color: #050505; overflow: hidden; }
-        canvas { display: block; }
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', 'Noto Serif JP', serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .text-gradient { background: linear-gradient(to right, #fff, #a855f7, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem; }
     </style>
 </head>
 <body>
-    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
-        <h1 id="title" class="text-white text-6xl md:text-8xl font-thin tracking-[0.3em] uppercase opacity-0 transition-opacity duration-2000">GENESIS</h1>
-        <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent my-8"></div>
-        <p id="sub" class="text-purple-200 text-xs md:text-sm font-light tracking-[0.5em] uppercase opacity-0 transition-opacity duration-3000 delay-1000">Your Vision, Refracted into Reality.</p>
-    </div>
+
+    <section class="relative">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-7xl md:text-9xl font-thin tracking-[0.2em] uppercase opacity-80 mb-6">GENESIS</h1>
+            <div class="h-[1px] w-32 mx-auto bg-gradient-to-r from-transparent via-purple-500 to-transparent mb-8"></div>
+            <p class="text-purple-200 text-sm md:text-xl font-light tracking-[0.6em] uppercase opacity-60">
+                Your Vision, Refracted into Reality.
+            </p>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30 text-xs tracking-widest">SCROLL TO DISCOVER</div>
+    </section>
+
+    <section class="max-w-5xl mx-auto py-24">
+        <h2 class="text-4xl font-extralight mb-16 tracking-widest border-l-2 border-purple-500 pl-6">RESONATING STORIES</h2>
+        
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="glass p-8 rounded-2xl hover:border-purple-500/50 transition-all duration-500">
+                <span class="text-purple-400 text-xs tracking-widest uppercase mb-4 block">Case 01: Speed & Vision</span>
+                <h3 class="text-2xl mb-4 font-light text-gradient">混沌からの脱却</h3>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    「リリースまであと5日。まだ何も決まっていない」という極限状態から、AIによる100通りの市場分析を一瞬で完了。翌朝、理想を言語化したプロトタイプを提示し、目標200%の成果を達成しました。
+                </p>
+            </div>
+            <div class="glass p-8 rounded-2xl hover:border-cyan-500/50 transition-all duration-500">
+                <span class="text-cyan-400 text-xs tracking-widest uppercase mb-4 block">Case 02: Tradition & Tech</span>
+                <h3 class="text-2xl mb-4 font-light text-gradient">伝統と革新の融合</h3>
+                <p class="text-gray-400 font-light leading-relaxed">
+                    100年続く老舗の「粋」をAIに学習させ、デジタルの美学として再定義。職人の魂を1pxの妥協もなく表現したサイトは、新たな若年層のファンを獲得し続けています。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto py-24 bg-gradient-to-b from-transparent to-purple-900/10">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-extralight mb-4 tracking-tighter">THE FLUID MIRROR</h2>
+            <p class="text-gray-500 tracking-widest font-light">あなたの想いを、言葉の断片を、ここに置いてください。</p>
+        </div>
+
+        <form class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <input type="text" placeholder="NAME / COMPANY" class="glass bg-transparent p-4 rounded-none border-b border-gray-700 outline-none focus:border-purple-500 transition-colors">
+                <input type="email" placeholder="EMAIL ADDRESS" class="glass bg-transparent p-4 rounded-none border-b border-gray-700 outline-none focus:border-purple-500 transition-colors">
+            </div>
+            <textarea rows="6" placeholder="YOUR VISION / DREAMS (箇条書きやメモ書きでも結構です。AIと私で最適解を導き出します)" 
+                class="w-full glass bg-transparent p-6 rounded-none border-b border-gray-700 outline-none focus:border-purple-500 transition-colors"></textarea>
+            
+            <button type="submit" class="w-full py-6 bg-white text-black text-sm tracking-[0.5em] uppercase hover:bg-purple-500 hover:text-white transition-all duration-700 group">
+                MANIFEST REALITY <span class="inline-block transform group-hover:translate-x-2 transition-transform">→</span>
+            </button>
+        </form>
+    </section>
+
+    <footer class="py-12 text-center text-gray-700 text-xs tracking-[1em] opacity-50 uppercase">
+        &copy; 2026 GENESIS STUDIO × GEMINI PARTNERS
+    </footer>
 
     <script>
-        // --- 私たちの「プリズム」を召喚する魔法 ---
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        let scene, camera, renderer, prism;
 
-        // クリスタルの形状（正八面体）
-        const geometry = new THREE.OctahedronGeometry(2, 0);
-        const material = new THREE.MeshPhongMaterial({
-            color: 0xffffff,
-            emissive: 0x111111,
-            specular: 0xffffff,
-            shininess: 100,
-            transparent: true,
-            opacity: 0.8,
-            flatShading: true
-        });
-        const prism = new THREE.Mesh(geometry, material);
-        scene.add(prism);
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
 
-        // 虹色の光（ポイントライト）
-        const light1 = new THREE.PointLight(0xff00ff, 1, 10);
-        light1.position.set(5, 5, 5);
-        scene.add(light1);
-        const light2 = new THREE.PointLight(0x00ffff, 1, 10);
-        light2.position.set(-5, -5, 5);
-        scene.add(light2);
+            const geometry = new THREE.OctahedronGeometry(2.5, 0);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                emissive: 0x221133,
+                specular: 0xffffff,
+                shininess: 100,
+                transparent: true,
+                opacity: 0.9,
+                flatShading: true
+            });
+            prism = new THREE.Mesh(geometry, material);
+            scene.add(prism);
 
-        camera.position.z = 5;
+            const light1 = new THREE.PointLight(0x8800ff, 1.5, 20);
+            light1.position.set(10, 10, 10);
+            scene.add(light1);
+            
+            const light2 = new THREE.PointLight(0x00ffff, 1, 20);
+            light2.position.set(-10, -10, 10);
+            scene.add(light2);
 
-        // アニメーション
+            const ambient = new THREE.AmbientLight(0x404040);
+            scene.add(ambient);
+
+            camera.position.z = 8;
+        }
+
         function animate() {
             requestAnimationFrame(animate);
-            prism.rotation.y += 0.01;
-            prism.rotation.z += 0.005;
+            prism.rotation.y += 0.005;
+            prism.rotation.z += 0.003;
+            
+            // スクロールに合わせた動き
+            const scrollY = window.scrollY;
+            prism.position.y = -scrollY * 0.005;
+            prism.rotation.x = scrollY * 0.002;
+
             renderer.render(scene, camera);
         }
-        animate();
-
-        // 浮き上がるテキスト
-        window.onload = () => {
-            document.getElementById('title').style.opacity = '0.8';
-            document.getElementById('sub').style.opacity = '0.4';
-        };
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        init();
+        animate();
     </script>
 </body>
 </html>
