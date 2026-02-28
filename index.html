@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>GENESIS | The Prism</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; background-color: #050505; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
+        <h1 id="title" class="text-white text-6xl md:text-8xl font-thin tracking-[0.3em] uppercase opacity-0 transition-opacity duration-2000">GENESIS</h1>
+        <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent my-8"></div>
+        <p id="sub" class="text-purple-200 text-xs md:text-sm font-light tracking-[0.5em] uppercase opacity-0 transition-opacity duration-3000 delay-1000">Your Vision, Refracted into Reality.</p>
+    </div>
+
+    <script>
+        // --- 私たちの「プリズム」を召喚する魔法 ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // クリスタルの形状（正八面体）
+        const geometry = new THREE.OctahedronGeometry(2, 0);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            emissive: 0x111111,
+            specular: 0xffffff,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.8,
+            flatShading: true
+        });
+        const prism = new THREE.Mesh(geometry, material);
+        scene.add(prism);
+
+        // 虹色の光（ポイントライト）
+        const light1 = new THREE.PointLight(0xff00ff, 1, 10);
+        light1.position.set(5, 5, 5);
+        scene.add(light1);
+        const light2 = new THREE.PointLight(0x00ffff, 1, 10);
+        light2.position.set(-5, -5, 5);
+        scene.add(light2);
+
+        camera.position.z = 5;
+
+        // アニメーション
+        function animate() {
+            requestAnimationFrame(animate);
+            prism.rotation.y += 0.01;
+            prism.rotation.z += 0.005;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // 浮き上がるテキスト
+        window.onload = () => {
+            document.getElementById('title').style.opacity = '0.8';
+            document.getElementById('sub').style.opacity = '0.4';
+        };
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
