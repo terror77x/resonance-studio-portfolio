@@ -158,21 +158,28 @@
     </div>
 
     <form id="contact-form" class="space-y-20 glass p-10 md:p-20 rounded-[4rem] border-t-2 border-purple-500/20">
-        <div class="grid md:grid-cols-2 gap-12">
+        <div class="grid md:grid-cols-3 gap-12">
             <div class="space-y-2">
-                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Identifier / 連絡先</label>
-                <input type="text" name="name" placeholder="お名前 / メールアドレス" required
+                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Name / お名前・企業名</label>
+                <input type="text" name="name" placeholder="RESONANCE Inc." required
                     class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg placeholder:text-gray-800">
             </div>
-            
+
+            <div class="space-y-2">
+                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Email / メールアドレス</label>
+                <input type="email" name="email" placeholder="vision@resonance.ai" required
+                    class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg placeholder:text-gray-800">
+            </div>
+    
             <div class="space-y-4">
                 <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Velocity / プラン選択</label>
-                <div class="flex gap-4">
+                <div class="relative">
                     <select name="package" class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-cyan-500 transition-all font-light tracking-widest text-lg appearance-none cursor-pointer">
                         <option value="Light" class="bg-black">Light: Accelerated Page</option>
                         <option value="Standard" class="bg-black" selected>Standard: Brand Authority</option>
                         <option value="Premium" class="bg-black">Premium: Ecosystem Design</option>
                     </select>
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[8px] text-gray-600">▼</div>
                 </div>
             </div>
         </div>
