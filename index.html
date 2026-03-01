@@ -147,62 +147,40 @@
         </div>
     </section>
 
-    <section id="canvas" class="max-w-5xl mx-auto py-32">
-    <div class="text-center mb-20">
-        <span class="text-purple-400 text-xs tracking-[0.5em] uppercase mb-4 block font-bold">Step 01: Ignition</span>
-        <h2 class="text-6xl font-extralight mb-8 tracking-tighter uppercase">AI Interactive Canvas</h2>
-        <p class="text-gray-400 tracking-[0.4em] font-light mb-12">「あなたのワガママを、キャンバスへ。」</p>
-        <div id="ai-status" class="h-6 text-cyan-500 text-[10px] tracking-[0.2em] font-light italic opacity-0 transition-opacity duration-1000">
-            RESONANCE: 戦略の脳があなたの熱量に共鳴中... 最短ルートを算出しています。
+    <section class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-6xl font-extralight mb-8 tracking-tighter uppercase">Contact</h2>
+            <p class="text-gray-400 tracking-[0.4em] font-light mb-12">「あなたのワガママを、キャンバスへ。」</p>
+            <p class="text-gray-500 text-sm font-light italic leading-relaxed">
+                完璧な言葉は不要です。箇条書きや断片的な想いでも、<br>AIがその意図を汲み取り、具現化のプロセスを開始します。
+            </p>
         </div>
-    </div>
 
-    <form id="contact-form" class="space-y-20 glass p-10 md:p-20 rounded-[4rem] border-t-2 border-purple-500/20">
-        <div class="grid md:grid-cols-3 gap-12">
-            <div class="space-y-2">
-                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Name / お名前・企業名</label>
-                <input type="text" name="name" placeholder="RESONANCE Inc." required
-                    class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg placeholder:text-gray-800">
-            </div>
-
-            <div class="space-y-2">
-                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Email / メールアドレス</label>
-                <input type="email" name="email" placeholder="vision@resonance.ai" required
-                    class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg placeholder:text-gray-800">
-            </div>
-    
-            <div class="space-y-4">
-                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Velocity / プラン選択</label>
-                <div class="relative">
-                    <select name="package" class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-cyan-500 transition-all font-light tracking-widest text-lg appearance-none cursor-pointer">
-                        <option value="Light" class="bg-black">Light: Accelerated Page</option>
-                        <option value="Standard" class="bg-black" selected>Standard: Brand Authority</option>
-                        <option value="Premium" class="bg-black">Premium: Ecosystem Design</option>
-                    </select>
-                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[8px] text-gray-600">▼</div>
+        <form id="contact-form" class="space-y-16">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-2">
+                    <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Name / Company</label>
+                    <input type="text" name="name" placeholder="お名前 / 貴社名" class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Email Address</label>
+                    <input type="email" name="email" placeholder="メールアドレス" class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light tracking-widest text-lg">
                 </div>
             </div>
-        </div>
-
-        <div class="space-y-4 relative">
-            <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">The Spark / 熱量の注入 (断片的なメモで構いません)</label>
-            <textarea id="spark-input" name="message" rows="6" required
-                placeholder="例：&#13;&#10;・1ヶ月以内に今のサイトを劇的に変えたい&#13;&#10;・AIチャットを導入して24時間自動接客したい&#13;&#10;・とにかく『高級感』と『速さ』を両立したい" 
-                class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-white transition-all font-light leading-relaxed text-xl placeholder:text-gray-800"></textarea>
-            
-            <div id="ripple-effect" class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent scale-x-0 transition-transform duration-1000"></div>
-        </div>
-
-        <button type="submit" id="submit-btn" class="w-full py-10 border border-white/20 text-white text-xs tracking-[1.5em] uppercase hover:bg-white hover:text-black hover:border-white transition-all duration-1000 font-bold overflow-hidden relative group">
-            <span class="relative z-10">Ignition: 共鳴を開始する</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
-        </button>
-    </form>
-</section>
+            <div class="space-y-2">
+                <label class="text-[10px] text-gray-600 tracking-widest uppercase ml-4">Your Vision (箇条書きやメモでも結構です)</label>
+                <textarea name="message" rows="6" 
+                    placeholder="例：&#13;&#10;・現状の違和感（サイトが古く、情熱が伝わっていない）&#13;&#10;・譲れないこだわり（職人の手触り感、高級感）&#13;&#10;・実現したい未来（1ヶ月以内に新しい層へ届けたい）" 
+                    class="w-full bg-transparent p-6 border-b border-gray-800 outline-none focus:border-purple-500 transition-all font-light leading-relaxed text-lg"></textarea>
+            </div>
+            <button type="submit" class="w-full py-10 glass text-white text-xs tracking-[1.5em] uppercase hover:bg-white hover:text-black transition-all duration-1000 font-bold">
+                RESONATE NOW →
+            </button>
+        </form>
     </section>
 
     <footer class="py-24 text-center text-gray-800 text-[10px] tracking-[1.8em] uppercase border-t border-white/5">
-        &copy; 2026 RESONANCE STUDIO
+        &copy; 2026 RESONANCE STUDIO × GEMINI PARTNERS
     </footer>
 
     <script>
@@ -251,23 +229,6 @@
         });
 
         init(); animate();
-
-        // --- AI Canvas Interactions ---
-        const sparkInput = document.getElementById('spark-input');
-        const aiStatus = document.getElementById('ai-status');
-        const ripple = document.getElementById('ripple-effect');
-
-        sparkInput.addEventListener('input', (e) => {
-            if (e.target.value.length > 5) {
-                aiStatus.style.opacity = "1";
-                ripple.style.transform = "scaleX(1)";
-                // Three.jsのオブジェクト（prism）の回転を少し速める
-                prism.rotation.y += 0.01;
-            } else {
-                aiStatus.style.opacity = "0";
-                ripple.style.transform = "scaleX(0)";
-            }
-        });
 
         // --- Form Submission Logic ---
         const contactForm = document.getElementById('contact-form');
