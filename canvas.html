@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CANVAS | RESONANCE AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass-panel { background: rgba(255, 255, 255, 0.01); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .input-glow:focus { border-bottom: 1px solid #fff; box-shadow: 0 10px 20px -10px rgba(255,255,255,0.2); }
+        ::placeholder { color: #333; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+    <div class="fixed inset-0 z-[-1] opacity-30">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-900/20 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-4xl w-full">
+        <header class="text-center mb-16">
+            <a href="index.html" class="text-[10px] tracking-[0.8em] text-gray-500 hover:text-white transition-all uppercase mb-8 block">← Back to Nexus</a>
+            <h1 class="text-5xl font-extralight tracking-tighter mb-4 uppercase">Interactive Canvas</h1>
+            <p class="text-gray-500 tracking-[0.3em] text-[10px] uppercase">Step 01: Ignition - 熱量の結晶化</p>
+        </header>
+
+        <form id="canvas-form" class="glass-panel p-12 md:p-20 rounded-[3rem] space-y-16">
+            <div class="space-y-6">
+                <label class="text-[10px] text-gray-600 tracking-[0.5em] uppercase block">01. The Spark / ビジョンの断片</label>
+                <textarea name="spark" required
+                    class="w-full bg-transparent border-b border-gray-900 outline-none p-4 text-xl font-light leading-relaxed input-glow transition-all h-40 resize-none"
+                    placeholder="まだ言葉にならない『熱量』を、そのまま書き出してください。"></textarea>
+            </div>
+
+            <div class="space-y-6">
+                <label class="text-[10px] text-gray-600 tracking-[0.5em] uppercase block">02. Velocity / 望む加速速度</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <label class="cursor-pointer group">
+                        <input type="radio" name="package" value="Light" class="hidden peer">
+                        <div class="p-6 border border-gray-900 peer-checked:border-white transition-all text-center">
+                            <span class="block text-xs font-bold mb-1">Light</span>
+                            <span class="block text-[8px] text-gray-600 tracking-widest uppercase">3 Days~</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                        <input type="radio" name="package" value="Standard" checked class="hidden peer">
+                        <div class="p-6 border border-gray-900 peer-checked:border-white transition-all text-center">
+                            <span class="block text-xs font-bold mb-1">Standard</span>
+                            <span class="block text-[8px] text-gray-600 tracking-widest uppercase">2 Weeks~</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                        <input type="radio" name="package" value="Premium" class="hidden peer">
+                        <div class="p-6 border border-gray-900 peer-checked:border-white transition-all text-center">
+                            <span class="block text-xs font-bold mb-1">Premium</span>
+                            <span class="block text-[8px] text-gray-600 tracking-widest uppercase">1 Month~</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-4">
+                    <label class="text-[10px] text-gray-600 tracking-[0.5em] uppercase block">Name / Identifier</label>
+                    <input type="text" name="name" required class="w-full bg-transparent border-b border-gray-900 outline-none p-4 input-glow transition-all">
+                </div>
+                <div class="space-y-4">
+                    <label class="text-[10px] text-gray-600 tracking-[0.5em] uppercase block">Email Address</label>
+                    <input type="email" name="email" required class="w-full bg-transparent border-b border-gray-900 outline-none p-4 input-glow transition-all">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-8 bg-white text-black text-[10px] font-bold tracking-[1.5em] uppercase hover:bg-transparent hover:text-white border border-white transition-all duration-700">
+                Resonate Now
+            </button>
+        </form>
+        
+        <div id="ai-feedback" class="mt-8 text-center text-[10px] text-cyan-500 tracking-[0.3em] italic opacity-0 transition-opacity duration-1000">
+            Gemini is scanning your vision... Optimized route calculating.
+        </div>
+    </div>
+
+    <script>
+        // 入力に応じて「AIが反応している」感を出す
+        const textarea = document.querySelector('textarea');
+        const feedback = document.getElementById('ai-feedback');
+        textarea.addEventListener('input', () => {
+            feedback.style.opacity = textarea.value.length > 10 ? "1" : "0";
+        });
+    </script>
+</body>
+</html>
