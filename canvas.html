@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CANVAS | RESONANCE AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.12.16/framer-motion.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400&family=Noto+Serif+JP:wght@200;500&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #c084fc; --bg: #050505; }
         body { background-color: var(--bg); color: #fff; font-family: 'Inter', 'Noto Serif JP', sans-serif; overflow-x: hidden; }
         
-        /* The Fluid Mirror: Aurora Background */
         .aurora {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #1a0a2a 0%, #050505 70%);
@@ -21,11 +19,7 @@
             position: absolute; width: 600px; height: 600px; background: linear-gradient(135deg, rgba(192,132,252,0.07) 0%, rgba(34,211,238,0.07) 100%);
             filter: blur(80px); border-radius: 50%; animation: move 20s infinite alternate;
         }
-
-        @keyframes move {
-            0% { transform: translate(-10%, -10%) rotate(0deg); }
-            100% { transform: translate(20%, 20%) rotate(360deg); }
-        }
+        @keyframes move { 0% { transform: translate(-10%, -10%) rotate(0deg); } 100% { transform: translate(20%, 20%) rotate(360deg); } }
 
         .glass { background: rgba(255, 255, 255, 0.01); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .input-underline { background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -35,15 +29,11 @@
         .step-content.active { display: block; animation: fadeIn 1s forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Progress Bar */
         .progress-container { width: 100%; height: 2px; background: rgba(255,255,255,0.05); position: fixed; top: 0; left: 0; z-index: 100; }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #c084fc, #22d3ee); transition: width 0.5s; }
 
         .suggestion-chip { cursor: pointer; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
         .suggestion-chip:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-
-        /* AI Whisper */
-        #ai-whisper { font-family: 'Noto Serif JP', serif; font-style: italic; min-height: 1.5em; }
     </style>
 </head>
 <body class="min-h-screen pt-20 pb-10 px-6">
@@ -55,7 +45,7 @@
             <a href="index.html" class="text-[10px] tracking-[0.8em] text-gray-500 hover:text-white transition-all uppercase mb-12 block">← Return to Nexus</a>
             <h1 class="text-4xl md:text-6xl font-extralight tracking-tighter mb-6 uppercase">AI Interactive Canvas</h1>
             <p class="text-gray-400 font-light text-sm tracking-[0.2em] leading-relaxed">
-                完璧な指示は不要です。あなたの脳内にあるキーワードを並べるだけで、私たちが形にします。
+                完璧な指示は不要です。キーワードを並べるだけで、私たちが形にします。
             </p>
         </header>
 
@@ -67,20 +57,15 @@
         <form id="canvas-form" action="https://formspree.io/f/mjgezdaq" method="POST" class="glass p-8 md:p-20 rounded-[3rem] relative">
             
             <div id="ai-response" class="mb-12 text-center opacity-0 transition-all duration-1000">
-                <span id="ai-whisper" class="text-cyan-400 text-xs tracking-widest font-light"></span>
+                <span id="ai-whisper" class="text-cyan-400 text-xs tracking-widest font-light italic"></span>
             </div>
 
-            <div id="mode-structured" class="space-y-24">
-                
+            <div id="mode-structured" class="space-y-12">
                 <section class="step-content active" id="step-1">
                     <h3 class="text-[10px] text-purple-400 tracking-[0.5em] uppercase mb-12">Section 01: Core Identity</h3>
                     <div class="space-y-16">
-                        <div class="group">
-                            <label class="block text-[10px] text-gray-600 tracking-widest mb-4">お名前 / 貴社名</label>
-                            <input type="text" name="name" required class="w-full input-underline p-4 text-xl font-light">
-                        </div>
                         <div>
-                            <label class="block text-[10px] text-gray-600 tracking-widest mb-4">ビジネスを一言で言うと？</label>
+                            <label class="block text-[10px] text-gray-600 tracking-widest mb-4">あなたのビジネスを一言で言うと？</label>
                             <input type="text" id="biz-input" name="business_type" placeholder="例：30代女性向けの隠れ家エステ" class="w-full input-underline p-4 text-xl font-light">
                             <div class="flex flex-wrap gap-2 mt-4">
                                 <span class="suggestion-chip px-3 py-1 rounded-full text-[10px]" onclick="fillInput('biz-input', '次世代AI SaaSサービス')">AI SaaS</span>
@@ -92,7 +77,9 @@
                             <input type="text" name="pain_point" placeholder="例：集客、ブランドイメージの刷新" class="w-full input-underline p-4 text-xl font-light">
                         </div>
                     </div>
-                    <button type="button" onclick="nextStep(2)" class="mt-16 text-[10px] tracking-[0.5em] text-gray-400 hover:text-white transition-all">Next: The Vision →</button>
+                    <div class="mt-16 flex justify-end">
+                        <button type="button" onclick="nextStep(2)" class="text-[10px] tracking-[0.5em] text-white border border-white/20 px-8 py-4 hover:bg-white hover:text-black transition-all">Next: The Vision →</button>
+                    </div>
                 </section>
 
                 <section class="step-content" id="step-2">
@@ -112,8 +99,8 @@
                         </div>
                     </div>
                     <div class="flex justify-between mt-16">
-                        <button type="button" onclick="nextStep(1)" class="text-[10px] tracking-[0.5em] text-gray-700 uppercase">← Back</button>
-                        <button type="button" onclick="nextStep(3)" class="text-[10px] tracking-[0.5em] text-gray-400 hover:text-white uppercase">Last Step →</button>
+                        <button type="button" onclick="nextStep(1)" class="text-[10px] tracking-[0.5em] text-gray-500 hover:text-white transition-all uppercase underline">← Back to Identity</button>
+                        <p class="text-[10px] text-gray-700 tracking-widest uppercase italic">Crystallizing...</p>
                     </div>
                 </section>
             </div>
@@ -121,25 +108,31 @@
             <div id="mode-flexible" class="hidden">
                 <section>
                     <h3 class="text-[10px] text-white tracking-[0.5em] uppercase mb-12">Flexible Request</h3>
-                    <p class="text-[10px] text-gray-600 mb-8 tracking-widest uppercase">箇条書きやメモ書きでも結構です。こちらにすべての想いを放り込んでください。</p>
-                    <textarea name="flexible_message" id="flex-input" class="w-full bg-transparent border border-gray-900 focus:border-white p-8 text-xl font-light leading-relaxed h-[400px] outline-none transition-all duration-1000" placeholder="メールを書くように、自由にお書きください。私が内容を整理し、具現化プランを策定します。"></textarea>
+                    <textarea name="flexible_message" id="flex-input" class="w-full bg-transparent border border-gray-900 focus:border-white p-8 text-xl font-light leading-relaxed h-[400px] outline-none transition-all duration-1000" placeholder="メールを書くように、自由にお書きください。"></textarea>
                 </section>
             </div>
 
-            <div class="mt-24 pt-12 border-t border-gray-900">
-                <label class="block text-[10px] text-gray-600 tracking-widest mb-4 uppercase">Identity / Email Address</label>
-                <input type="email" name="email" required placeholder="vision@resonance.ai" class="w-full input-underline p-4 text-xl font-light">
+            <div class="mt-24 pt-12 border-t border-gray-900 space-y-12">
+                <h4 class="text-[10px] text-gray-500 tracking-[0.5em] uppercase mb-8">Final Identity</h4>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <label class="block text-[10px] text-gray-600 tracking-widest mb-4 uppercase">Name / お名前・貴社名 *</label>
+                        <input type="text" name="name" required placeholder="RESONANCE Inc." class="w-full input-underline p-4 text-xl font-light">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-gray-600 tracking-widest mb-4 uppercase">Email Address *</label>
+                        <input type="email" name="email" required placeholder="vision@resonance.ai" class="w-full input-underline p-4 text-xl font-light">
+                    </div>
+                </div>
             </div>
 
             <button type="submit" id="birth-btn" class="w-full mt-20 py-10 bg-white text-black text-[10px] font-bold tracking-[1.5em] uppercase hover:bg-transparent hover:text-white border border-white transition-all duration-1000 overflow-hidden relative">
                 <span id="btn-text" class="relative z-10">IGNITION : 具現化を開始する</span>
-                <div id="particle-container"></div>
             </button>
         </form>
     </main>
 
     <script>
-        // Mode Switch
         function toggleMode(mode) {
             const s = document.getElementById('mode-structured');
             const f = document.getElementById('mode-flexible');
@@ -150,63 +143,50 @@
                 s.classList.remove('hidden'); f.classList.add('hidden');
                 bS.classList.add('border-white'); bS.classList.remove('text-gray-600');
                 bF.classList.remove('border-white'); bF.classList.add('text-gray-600');
-                updateProgress(currentStep / 3 * 100);
+                updateProgress(currentStep / 2 * 100);
             } else {
                 s.classList.add('hidden'); f.classList.remove('hidden');
                 bF.classList.add('border-white'); bF.classList.remove('text-gray-600');
                 bS.classList.remove('border-white'); bS.classList.add('text-gray-600');
-                updateProgress(80);
+                updateProgress(100);
             }
         }
 
-        // Stepper
         let currentStep = 1;
         function nextStep(step) {
             document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
             document.getElementById('step-' + step).classList.add('active');
             currentStep = step;
             updateProgress(currentStep / 2 * 100);
-            
-            if(step === 2) whisperAI("ビジョンを共有しましょう。あなたの『こだわり』が、デザインの魂になります。");
+            if(step === 2) whisperAI("ビジョンを共有しましょう。あなたの想いがデザインの魂になります。");
+            window.scrollTo({ top: document.querySelector('form').offsetTop - 100, behavior: 'smooth' });
         }
 
         function updateProgress(val) { document.getElementById('progress-bar').style.width = val + '%'; }
         function fillInput(id, val) { document.getElementById(id).value = val; hearKeywords(val); }
 
-        // AI Whisper & Reaction
         function whisperAI(msg) {
             const resp = document.getElementById('ai-response');
             const text = document.getElementById('ai-whisper');
             resp.style.opacity = 0;
-            setTimeout(() => {
-                text.innerText = msg;
-                resp.style.opacity = 1;
-            }, 500);
+            setTimeout(() => { text.innerText = msg; resp.style.opacity = 1; }, 500);
         }
 
         function hearKeywords(val) {
             if (val.includes('高級')) {
                 document.querySelector('.aurora').style.background = "radial-gradient(circle at 50% 50%, #2a1a0a 0%, #050505 70%)";
-                whisperAI("高級感、素敵ですね。信頼感と静謐さを纏ったデザインを構築します。");
+                whisperAI("高級感。信頼感と静謐さを纏ったデザインを構築します。");
             } else if (val.includes('遊び心')) {
                 document.querySelector('.aurora').style.background = "radial-gradient(circle at 50% 50%, #0a2a1a 0%, #050505 70%)";
-                whisperAI("遊び心ですね。ユーザーの心が弾むような、動的な体験を設計しましょう。");
-            } else if (val.length > 5) {
-                whisperAI("そのイメージ、確かに受信しました。共鳴が進んでいます。");
+                whisperAI("遊び心。ユーザーの心が弾む動的な体験を設計しましょう。");
             }
         }
 
-        // Birth Effect & Submit
         document.getElementById('canvas-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('birth-btn');
             const btnText = document.getElementById('btn-text');
-            
             btnText.innerText = "CRYSTALLIZING...";
-            btn.style.letterSpacing = "0.5em";
-            
-            // 擬似的な解析アニメーション
-            await new Promise(r => setTimeout(r, 2000));
             
             const formData = new FormData(e.target);
             try {
@@ -217,13 +197,10 @@
                 });
                 if (response.ok) {
                     btnText.innerText = "BORN. あなたの空想は現実へ。";
-                    btn.classList.add('bg-cyan-500');
-                    alert("Ignition Sequence Started. 戦略の脳（AI）が解析を開始しました。24時間以内にプロトタイプを提示します。");
+                    alert("Ignition Sequence Started. 24時間以内にプロトタイプを提示します。");
                     window.location.href = "index.html";
                 }
-            } catch (err) {
-                btnText.innerText = "ERROR - RETRY";
-            }
+            } catch (err) { btnText.innerText = "ERROR - RETRY"; }
         });
     </script>
 </body>
