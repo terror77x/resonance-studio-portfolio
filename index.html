@@ -28,74 +28,73 @@
         header { 
             position: fixed; top: 0; left: 0; width: 100%; padding: 24px 40px; z-index: 1000; 
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(249, 247, 242, 0.8); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(249, 247, 242, 0.85); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
         .logo { font-weight: 700; letter-spacing: 0.4em; font-size: 1rem; text-decoration: none; color: var(--text-color); }
-        nav a { text-decoration: none; color: var(--text-color); font-size: 0.75rem; letter-spacing: 0.2em; margin-left: 32px; font-weight: 600; text-transform: uppercase; transition: color 0.3s; }
-        nav a:hover { color: var(--accent-color); }
+        nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.2em; margin-left: 32px; font-weight: 700; text-transform: uppercase; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .section-label { font-size: 0.7rem; letter-spacing: 0.4em; color: var(--accent-color); margin-bottom: 40px; text-transform: uppercase; text-align: center; display: block; font-weight: 700; }
+        .section-label { font-size: 0.65rem; letter-spacing: 0.5em; color: var(--accent-color); margin-bottom: 48px; text-transform: uppercase; text-align: center; display: block; font-weight: 800; }
 
         /* --- Hero --- */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 24px; position: relative; }
-        .hero-main-copy { font-family: var(--font-serif); font-size: clamp(1.8rem, 8vw, 3.8rem); font-weight: 500; letter-spacing: 0.15em; margin-bottom: 32px; z-index: 2; }
-        .hero-sub-copy { font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: var(--sub-text); max-width: 600px; margin-bottom: 56px; letter-spacing: 0.05em; z-index: 2; }
-        .hero-sub-copy span { display: block; margin-bottom: 12px; color: var(--text-color); font-weight: 600; }
-        .cta-button { display: inline-block; padding: 22px 64px; border: 1px solid var(--text-color); color: var(--text-color); text-decoration: none; letter-spacing: 0.25em; font-size: 0.85rem; transition: all 0.5s; background: transparent; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 24px; }
+        .hero-main-copy { font-family: var(--font-serif); font-size: clamp(2rem, 8vw, 3.8rem); font-weight: 500; letter-spacing: 0.15em; margin-bottom: 40px; }
+        .hero-sub-copy { font-size: clamp(0.9rem, 2.5vw, 1.15rem); color: var(--sub-text); max-width: 700px; margin-bottom: 64px; }
+        .hero-sub-copy span { display: block; margin-bottom: 16px; color: var(--text-color); font-weight: 600; letter-spacing: 0.1em; }
+        .cta-button { display: inline-block; padding: 24px 72px; border: 1px solid var(--text-color); color: var(--text-color); text-decoration: none; letter-spacing: 0.3em; font-size: 0.8rem; font-weight: 700; transition: all 0.6s; background: transparent; }
         .cta-button:hover { background-color: var(--text-color); color: var(--bg-color); }
 
-        /* --- Identity (With Image) --- */
+        /* --- Identity --- */
         .identity { padding: var(--section-padding); display: flex; flex-direction: column; align-items: center; }
-        .identity-content { max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .identity-image { width: 100%; height: 500px; overflow: hidden; position: relative; }
-        .identity-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%) sepia(10%); transition: transform 1.5s; }
-        .identity-image:hover img { transform: scale(1.05); }
-        .identity-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 32px; letter-spacing: 0.2em; text-align: left; }
-        .identity-text { font-size: 1.1rem; color: var(--sub-text); text-align: left; }
-        .identity-text strong { color: var(--text-color); font-weight: 600; }
+        .identity-content { max-width: 1100px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 100px; align-items: center; }
+        .identity-image { width: 100%; height: 600px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+        .identity-image img { width: 100%; height: 100%; object-fit: cover; filter: sepia(5%) contrast(1.05); }
+        .identity-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 40px; letter-spacing: 0.2em; line-height: 1.4; }
+        .identity-text { font-size: 1.15rem; color: var(--sub-text); line-height: 2; }
+        .identity-text strong { color: var(--text-color); font-weight: 600; border-bottom: 1px solid var(--accent-color); }
 
-        @media (max-width: 850px) {
-            .identity-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+        @media (max-width: 900px) {
+            .identity-content { grid-template-columns: 1fr; gap: 60px; }
+            .identity-image { height: 400px; order: 2; }
             .identity-title, .identity-text { text-align: center; }
-            .identity-image { height: 350px; }
         }
 
         /* --- Packages --- */
-        .packages { padding: var(--section-padding); max-width: 1200px; margin: 0 auto; }
-        .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-        .package-card { background: #FFFFFF; border: 1px solid #EAEAEA; padding: 60px 40px; position: relative; transition: all 0.5s; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
-        .package-card:hover { border-color: var(--accent-color); transform: translateY(-10px); }
-        .package-tag { position: absolute; top: 24px; right: 24px; font-size: 0.6rem; letter-spacing: 0.15em; padding: 4px 12px; background: var(--accent-color); color: white; }
-        .package-name { font-size: 1.4rem; margin-bottom: 8px; font-weight: 600; }
-        .package-price { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 24px; }
-        .package-features { list-style: none; margin-bottom: 40px; }
-        .package-features li { font-size: 0.9rem; color: var(--sub-text); margin-bottom: 14px; position: relative; padding-left: 20px; }
-        .package-features li::before { content: "●"; position: absolute; left: 0; color: var(--accent-color); font-size: 0.5rem; top: 3px; }
+        .packages { padding: var(--section-padding); max-width: 1300px; margin: 0 auto; }
+        .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 48px; margin-top: 40px; }
+        .package-card { background: #FFFFFF; border: 1px solid #EAEAEA; padding: 70px 48px; transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .package-card:hover { border-color: var(--accent-color); transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.03); }
+        .package-type { font-size: 0.7rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.2em; margin-bottom: 16px; text-transform: uppercase; }
+        .package-name { font-size: 1.6rem; margin-bottom: 12px; font-weight: 600; font-family: var(--font-serif); }
+        .package-price { font-size: 1.8rem; margin-bottom: 32px; font-weight: 500; }
+        .package-price span { font-size: 0.9rem; color: var(--sub-text); margin-left: 4px; }
+        .package-desc { font-size: 0.95rem; color: var(--text-color); margin-bottom: 32px; font-weight: 600; line-height: 1.6; }
+        .package-features { list-style: none; margin-bottom: 48px; border-top: 1px solid #F5F5F5; padding-top: 32px; }
+        .package-features li { font-size: 0.9rem; color: var(--sub-text); margin-bottom: 16px; padding-left: 24px; position: relative; }
+        .package-features li::before { content: "→"; position: absolute; left: 0; color: var(--accent-color); font-weight: 700; }
 
         /* --- Process --- */
-        .process { padding: var(--section-padding); max-width: 900px; margin: 0 auto; }
-        .process-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.2rem); text-align: center; margin-bottom: 80px; letter-spacing: 0.15em; }
-        .process-list { position: relative; padding-left: 48px; border-left: 1px solid #EAEAEA; }
-        .process-item { position: relative; margin-bottom: 88px; }
-        .process-dot { position: absolute; left: -58px; top: 6px; width: 20px; height: 20px; background: var(--bg-color); border: 2px solid #EAEAEA; border-radius: 50%; z-index: 1; transition: 0.6s; }
-        .process-item.active .process-dot { border-color: var(--accent-color); background: var(--accent-color); }
-        .process-step { font-size: 0.75rem; color: var(--accent-color); letter-spacing: 0.2em; margin-bottom: 12px; display: block; font-weight: 700; }
-        .process-head { font-size: 1.3rem; margin-bottom: 16px; font-weight: 600; }
-        .process-desc { color: var(--sub-text); font-size: 0.95rem; }
+        .process { padding: var(--section-padding); max-width: 1000px; margin: 0 auto; }
+        .process-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.4rem); text-align: center; margin-bottom: 100px; letter-spacing: 0.2em; }
+        .process-list { position: relative; padding-left: 60px; border-left: 1px solid #EAEAEA; }
+        .process-item { position: relative; margin-bottom: 100px; }
+        .process-dot { position: absolute; left: -71px; top: 6px; width: 22px; height: 22px; background: var(--bg-color); border: 2px solid #EAEAEA; border-radius: 50%; z-index: 1; transition: 0.6s; }
+        .process-item.active .process-dot { border-color: var(--accent-color); background: var(--accent-color); transform: scale(1.2); }
+        .process-step { font-size: 0.75rem; color: var(--accent-color); letter-spacing: 0.3em; margin-bottom: 16px; display: block; font-weight: 800; }
+        .process-head { font-size: 1.4rem; margin-bottom: 20px; font-weight: 600; letter-spacing: 0.05em; }
+        .process-desc { color: var(--sub-text); font-size: 1rem; max-width: 600px; }
 
-        footer { padding: 100px 24px; text-align: center; border-top: 1px solid #EAEAEA; background: #fff; }
-        
+        footer { padding: 120px 24px; text-align: center; border-top: 1px solid #EAEAEA; background: #fff; }
         .mobile-br { display: none; }
         @media (max-width: 768px) { .mobile-br { display: block; } nav { display: none; } }
     </style>
 </head>
 <body>
     <div id="canvas-container">
-        <div class="fluid-blob" style="top: -10%; left: -10%; background: radial-gradient(circle, #D4A37315 0%, transparent 70%);"></div>
-        <div class="fluid-blob" style="bottom: -10%; right: -10%; animation-delay: -10s; background: radial-gradient(circle, #2F3E4608 0%, transparent 70%);"></div>
+        <div class="fluid-blob" style="top: -10%; left: -10%; background: radial-gradient(circle, #D4A37310 0%, transparent 70%);"></div>
+        <div class="fluid-blob" style="bottom: -10%; right: -10%; animation-delay: -10s; background: radial-gradient(circle, #2F3E4605 0%, transparent 70%);"></div>
     </div>
 
     <header>
@@ -120,73 +119,84 @@
         <div class="section-label reveal">Our Identity</div>
         <div class="identity-content">
             <div class="identity-image reveal">
-                <img src="https://images.unsplash.com/photo-1490077476659-095159692ab5?auto=format&fit=crop&q=80&w=1000" alt="Resonance Concept">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200" alt="Core Concept">
             </div>
             <div class="identity-info">
-                <h2 class="identity-title reveal">制作ではなく「共鳴」。</h2>
+                <h2 class="identity-title reveal">制作ではなく、<br>「共鳴」を。</h2>
                 <div class="identity-text reveal">
-                    <p>あなたの想いを私が受け取り、<br class="mobile-br">AIが即座に反映します。<br><br><strong>私とAIだけだからこその、<br class="mobile-br"></strong>圧倒的なスピードと純度を<br>実現します。</p>
+                    <p>
+                        あなたの想いを私が受け取り、AIが即座に反映します。<br><br>
+                        一切の無駄を削ぎ落とした、<strong>私とAIだけだからこその</strong>圧倒的なスピードと純度。それがRESONANCEの在り方です。
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="packages" class="packages">
-        <div class="section-label reveal">Service Packages</div>
+        <div class="section-label reveal">Services</div>
         <div class="package-grid">
             <div class="package-card reveal">
-                <h3 class="package-name">Light</h3>
+                <p class="package-type">Verification</p>
+                <h3 class="package-name">検証の1ページ</h3>
                 <p class="package-price">¥500,000<span>〜</span></p>
+                <p class="package-desc">新しいアイデアを、最速で市場へ問い直すための武器。</p>
                 <ul class="package-features">
-                    <li>最速の市場検証</li>
-                    <li>AIライティング最適化</li>
-                    <li>納期：3日〜1週間</li>
+                    <li>戦略的ランディングページ制作</li>
+                    <li>AIによる高精度なコピーライティング</li>
+                    <li>最短3日〜1週間の超短期納品</li>
                 </ul>
-                <p class="package-footer">まずは形にしたい方へ</p>
             </div>
-            <div class="package-card recommended reveal" style="transition-delay: 0.2s;">
-                <div class="package-tag">RECOMMENDED</div>
-                <h3 class="package-name">Standard</h3>
+            <div class="package-card reveal" style="transition-delay: 0.2s; border-color: #D4A373;">
+                <p class="package-type">Reliability</p>
+                <h3 class="package-name">信頼の母体</h3>
                 <p class="package-price">¥1,200,000<span>〜</span></p>
+                <p class="package-desc">プロとしての品格を纏い、集客を加速させる営業の拠点。</p>
                 <ul class="package-features">
-                    <li>ブランド確立</li>
-                    <li>独自AI対話導入</li>
-                    <li>納期：2週間〜3週間</li>
+                    <li>中規模ブランドサイト（5〜8P）</li>
+                    <li>AIチャットボット・自動接客導入</li>
+                    <li>検索上位を狙うSEO構造設計</li>
                 </ul>
-                <p class="package-footer">信頼を勝ち取りたい方へ</p>
             </div>
             <div class="package-card reveal" style="transition-delay: 0.4s;">
-                <h3 class="package-name">Premium</h3>
+                <p class="package-type">Innovation</p>
+                <h3 class="package-name">資産の創出</h3>
                 <p class="package-price">¥3,000,000<span>〜</span></p>
+                <p class="package-desc">既存の枠組みを破壊し、独自の成功サイクルを自律させる。</p>
                 <ul class="package-features">
-                    <li>フルオーダーAI開発</li>
-                    <li>半年間の継続改善コンサル</li>
-                    <li>納期：1ヶ月〜</li>
+                    <li>フルオーダーAIシステム開発</li>
+                    <li>半年間の継続的な改善コンサルティング</li>
+                    <li>ビジネスモデルのデジタル最適化</li>
                 </ul>
-                <p class="package-footer">ビジネスを革新したい方へ</p>
             </div>
         </div>
     </section>
 
     <section id="process" class="process">
-        <div class="section-label reveal">Our Process</div>
-        <h2 class="process-title reveal">理想を現実に導く4つのステップ</h2>
+        <div class="section-label reveal">Flow</div>
+        <h2 class="process-title reveal">理想を現実に導く、<br>4つのステップ。</h2>
         <div class="process-list">
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 01</span><h3 class="process-head">正解の特定</h3><p class="process-desc">対話を通じて迷いをゼロにします。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 02</span><h3 class="process-head">実物の提示</h3><p class="process-desc">24時間〜48時間以内に試作を提示。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 03</span><h3 class="process-head">究極の実装</h3><p class="process-desc">1pxの妥協もなく磨き上げます。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 04</span><h3 class="process-head">資産の始動</h3><p class="process-desc">公開即、ビジネスが動き出します。</p></div>
+            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 01</span><h3 class="process-head">正解の特定</h3><p class="process-desc">対話を通じて、あなたが本当に手に入れたい「結果」を抽出。迷いをゼロにします。</p></div>
+            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 02</span><h3 class="process-head">実物の提示</h3><p class="process-desc">24時間以内に、実際に触れるプロトタイプを提示。言葉による誤解を排除します。</p></div>
+            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 03</span><h3 class="process-head">究極の実装</h3><p class="process-desc">1pxの妥協もなく、AIの精度と人間の審美眼を融合。完璧な形へ磨き上げます。</p></div>
+            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 04</span><h3 class="process-head">資産の始動</h3><p class="process-desc">公開はゴールではありません。ここからあなたのビジネスは自律的に動き出します。</p></div>
         </div>
     </section>
 
     <footer>
-        <div class="logo" style="margin-bottom: 24px;">RESONANCE</div>
-        <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sub-text);">© 2026 RESONANCE. All Rights Reserved.</p>
+        <div class="logo" style="margin-bottom: 32px;">RESONANCE</div>
+        <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--sub-text);">© 2026 RESONANCE. All Rights Reserved.</p>
     </footer>
 
     <script>
-        document.addEventListener('mousemove', (e) => { const moveX = (e.clientX - window.innerWidth / 2) * 0.01; const moveY = (e.clientY - window.innerHeight / 2) * 0.01; document.querySelector('#canvas-container').style.transform = `translate(${moveX}px, ${moveY}px)`; });
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } }); }, { threshold: 0.1 });
+        document.addEventListener('mousemove', (e) => { 
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01; 
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01; 
+            document.querySelector('#canvas-container').style.transform = `translate(${moveX}px, ${moveY}px)`; 
+        });
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); 
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .process-item').forEach(el => observer.observe(el));
     </script>
 </body>
