@@ -53,7 +53,7 @@
         .cta-button { display: inline-block; padding: 22px 64px; border: 1px solid var(--text-color); color: var(--text-color); text-decoration: none; letter-spacing: 0.3em; font-size: 0.8rem; font-weight: 700; transition: 0.4s; background: transparent; }
         .cta-button:hover { background-color: var(--text-color); color: var(--bg-pure); }
 
-        /* --- Identity: Balanced layout --- */
+        /* --- Identity --- */
         .identity { background: var(--bg-pure); }
         .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
         .identity-image { width: 100%; height: 500px; background: #f0f0f0; overflow: hidden; }
@@ -61,28 +61,36 @@
         .identity-text { font-size: 1.1rem; line-height: 2.2; color: var(--sub-text); }
         .identity-text strong { color: var(--text-color); font-weight: 700; }
 
-        /* --- Cases: Horizontal Scannability --- */
+        /* --- Cases (3 items) --- */
         .cases { background: var(--bg-color); }
         .case-card { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; margin-bottom: 60px; background: var(--bg-pure); padding: 40px; border: 1px solid #eee; }
-        .case-card:nth-child(even) { direction: rtl; }
+        .case-card:nth-child(even) { direction: rtl; } /* 2つ目を左右反転させる */
         .case-card:nth-child(even) .case-info { direction: ltr; text-align: left; }
         .case-img-small { width: 100%; height: 300px; overflow: hidden; }
         .case-img-small img { width: 100%; height: 100%; object-fit: cover; }
         .case-tag { font-size: 0.6rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.3em; margin-bottom: 16px; display: block; }
         .case-title { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 24px; }
 
-        /* --- Services & Support: Compact & Clear --- */
+        /* --- Services & Support --- */
         .services { background: var(--bg-pure); }
         .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
         .service-card { padding: 50px 32px; border: 1px solid #f0f0f0; transition: 0.4s; }
-        .service-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+        .service-card:hover { border-color: var(--accent-color); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
         .service-name { font-size: 1.4rem; font-family: var(--font-serif); margin-bottom: 16px; }
         .service-price { font-size: 1.8rem; margin-bottom: 32px; font-weight: 500; }
         .service-features { list-style: none; font-size: 0.85rem; color: var(--sub-text); border-top: 1px solid #f9f9f9; padding-top: 24px; }
         .service-features li { margin-bottom: 12px; }
 
-        .support-strip { margin-top: 80px; padding: 40px; background: var(--bg-color); text-align: center; border: 1px dashed var(--accent-color); }
-        .support-strip p { font-size: 0.9rem; color: var(--sub-text); max-width: 700px; margin: 0 auto; }
+        /* Living Asset Support (Detailed) */
+        .support-area { margin-top: 100px; padding: 60px 40px; background: var(--bg-color); border: 1px solid #EAEAEA; }
+        .support-title { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 16px; text-align: center; letter-spacing: 0.1em; }
+        .support-desc { text-align: center; color: var(--sub-text); margin-bottom: 48px; font-size: 0.95rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .support-grid-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+        .support-plan-card { background: var(--bg-pure); padding: 32px 24px; border: 1px solid #EAEAEA; }
+        .support-plan-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--text-color); }
+        .support-plan-price { font-size: 1.3rem; font-family: var(--font-serif); margin-bottom: 16px; color: var(--accent-color); }
+        .support-plan-price span { font-size: 0.8rem; color: var(--sub-text); font-family: var(--font-main); }
+        .support-plan-detail { font-size: 0.85rem; color: var(--sub-text); line-height: 1.6; }
 
         /* --- Process --- */
         .process { background: var(--bg-pure); }
@@ -101,6 +109,7 @@
             .case-card:nth-child(even) { direction: ltr; }
             .hero-main-copy { font-size: 2.2rem; }
             nav { display: none; }
+            .support-area { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -140,7 +149,10 @@
                     <h2 class="section-title" style="text-align: left;">制作ではなく、<br>「共鳴」を。</h2>
                     <p class="identity-text">
                         あなたの想いを私が受け取り、AIが即座に反映します。<br><br>
-                        一切の無駄を削ぎ落とした、<strong>私とAIだけだからこその</strong>圧倒的なスピードと純度。それがRESONANCEの在り方です。
+                        一切の無駄を削ぎ落とした、<br>
+                        <strong>私とAIだけだからこその</strong><br>
+                        圧倒的なスピードと純度。<br>
+                        それがRESONANCEの在り方です。
                     </p>
                 </div>
             </div>
@@ -167,6 +179,15 @@
                     <span class="case-tag">RELIABILITY</span>
                     <h3 class="case-title">専門性を「信頼」へ、税理士事務所。</h3>
                     <p class="case-desc">24時間稼働のAI自動接客を導入し、敷居の高さを払拭。問い合わせ率を前年比400%へと加速。</p>
+                </div>
+            </div>
+
+            <div class="case-card reveal">
+                <div class="case-img-small"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" alt="Case 3"></div>
+                <div class="case-info">
+                    <span class="case-tag">INNOVATION</span>
+                    <h3 class="case-title">価値を「世界」へ、工芸品マーケット。</h3>
+                    <p class="case-desc">多言語AIと物流システムを統合し、海外売上が5割を超えるグローバルな無形資産へと進化。</p>
                 </div>
             </div>
         </div>
@@ -207,10 +228,29 @@
                 </div>
             </div>
 
-            <div class="support-strip reveal">
-                <h4 style="font-size: 0.8rem; letter-spacing: 0.2em; margin-bottom: 16px;">LIVING ASSET SUPPORT</h4>
-                <p>公開はゴールではありません。AI解析による毎月の改善提案、市場の変化に合わせた迅速なアップデート、安全なインフラ管理を<strong>月額¥50,000〜</strong>でお引き受けします。</p>
+            <div class="support-area reveal">
+                <h3 class="support-title">LIVING ASSET SUPPORT</h3>
+                <p class="support-desc">公開はゴールではなく、資産運用のはじまりです。<br>サイトを放置せず、常に進化させるための月額支援をご用意しています。</p>
+                
+                <div class="support-grid-inner">
+                    <div class="support-plan-card">
+                        <h4 class="support-plan-name">Standard</h4>
+                        <p class="support-plan-price">¥50,000<span> / 月</span></p>
+                        <p class="support-plan-detail">毎月のAIアクセス解析レポート、軽微な文言修正、安全なインフラ保守管理。</p>
+                    </div>
+                    <div class="support-plan-card" style="border-color: var(--accent-color);">
+                        <h4 class="support-plan-name">Growth</h4>
+                        <p class="support-plan-price">¥150,000<span> / 月</span></p>
+                        <p class="support-plan-detail">積極的なUI/UX改善提案、A/Bテストの実施、広告運用とのシステム連携。</p>
+                    </div>
+                    <div class="support-plan-card">
+                        <h4 class="support-plan-name">Executive</h4>
+                        <p class="support-plan-price">¥300,000<span>〜 / 月</span></p>
+                        <p class="support-plan-detail">専属のAIコンシェルジュ運用、新規機能の継続開発、経営直結の戦略コンサル。</p>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </section>
 
