@@ -26,7 +26,7 @@
         .checkbox-input:checked + .checkbox-label { border-color: var(--accent-color); background: rgba(212, 163, 115, 0.05); color: var(--accent-color); font-weight: 600; }
         .submit-area { text-align: center; margin-top: 80px; }
         .submit-btn { background: var(--text-color); color: var(--bg-color); border: none; padding: 24px 80px; font-size: 0.9rem; letter-spacing: 0.3em; cursor: pointer; transition: all 0.5s; font-weight: 600; }
-        .submit-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        .submit-btn:disabled { background: var(--sub-text); cursor: not-allowed; }
         .back-link { display: inline-block; margin-bottom: 40px; color: var(--accent-color); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; font-weight: 700; }
     </style>
 </head>
@@ -39,8 +39,7 @@
             <p>あなたの想いを最短距離で現実にするために、<br>今の状況をありのままに教えてください。</p>
         </div>
 
-        <form action="https://formspree.io/f/mdawndoz" method="POST">
-            
+        <form id="resonance-form">
             <div class="form-group">
                 <label class="form-label">お名前 / 企業名</label>
                 <input type="text" name="お名前_企業名" class="form-input" required placeholder="例：株式会社共鳴 / 山田 太郎">
@@ -52,7 +51,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Q1. 実現したいことは何ですか？<span>（例：認知度向上、売上アップ、ブランディング等）</span></label>
+                <label class="form-label">Q1. 実現したいことは何ですか？</label>
                 <textarea name="Q1_実現したいこと" class="form-textarea" rows="4"></textarea>
             </div>
 
@@ -67,42 +66,84 @@
 
             <div class="form-group">
                 <label class="form-label">Q3. どんな人に見てほしいですか？</label>
-                <input type="text" name="Q3_ターゲット" class="form-input" placeholder="例：30代の働く女性など">
+                <input type="text" name="Q3_ターゲット" class="form-input">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Q4. 参考サイトや好きなデザインはありますか？</label>
-                <input type="text" name="Q4_参考サイト" class="form-input" placeholder="URLやキーワードなど">
+                <input type="text" name="Q4_参考サイト" class="form-input">
             </div>
 
             <div class="form-group">
                 <label class="form-label">Q5. どのプランに興味がありますか？</label>
                 <div class="checkbox-group">
-                    <input type="radio" name="Q5_興味のあるプラン" id="q5-1" value="検証の1ページ" class="checkbox-input"><label for="q5-1" class="checkbox-label">検証の1ページ</label>
-                    <input type="radio" name="Q5_興味のあるプラン" id="q5-2" value="信頼の母体" class="checkbox-input"><label for="q5-2" class="checkbox-label">信頼의母体</label>
-                    <input type="radio" name="Q5_興味のあるプラン" id="q5-3" value="資産の創出" class="checkbox-input"><label for="q5-3" class="checkbox-label">資産の創出</label>
-                    <input type="radio" name="Q5_興味のあるプラン" id="q5-4" value="相談して決めたい" class="checkbox-input"><label for="q5-4" class="checkbox-label">相談して決めたい</label>
+                    <input type="radio" name="Q5_プラン" id="q5-1" value="検証の1ページ" class="checkbox-input"><label for="q5-1" class="checkbox-label">検証の1ページ</label>
+                    <input type="radio" name="Q5_プラン" id="q5-2" value="信頼の母体" class="checkbox-input"><label for="q5-2" class="checkbox-label">信頼の母体</label>
+                    <input type="radio" name="Q5_プラン" id="q5-3" value="資産の創出" class="checkbox-input"><label for="q5-3" class="checkbox-label">資産の創出</label>
+                    <input type="radio" name="Q5_プラン" id="q5-4" value="相談して決めたい" class="checkbox-input"><label for="q5-4" class="checkbox-label">相談して決めたい</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Q6. どの部分を任せたいですか？（複数選択可）</label>
                 <div class="checkbox-group">
-                    <input type="checkbox" name="Q6_希望範囲" value="企画" id="q6-1" class="checkbox-input"><label for="q6-1" class="checkbox-label">企画・おまかせ</label>
-                    <input type="checkbox" name="Q6_希望範囲" value="制作" id="q6-2" class="checkbox-input"><label for="q6-2" class="checkbox-label">制作・デザイン</label>
-                    <input type="checkbox" name="Q6_希望範囲" value="管理" id="q6-3" class="checkbox-input"><label for="q6-3" class="checkbox-label">管理・改善</label>
+                    <input type="checkbox" name="Q6_範囲" value="企画" id="q6-1" class="checkbox-input"><label for="q6-1" class="checkbox-label">企画・おまかせ</label>
+                    <input type="checkbox" name="Q6_範囲" value="制作" id="q6-2" class="checkbox-input"><label for="q6-2" class="checkbox-label">制作・デザイン</label>
+                    <input type="checkbox" name="Q6_範囲" value="管理" id="q6-3" class="checkbox-input"><label for="q6-3" class="checkbox-label">管理・改善</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Q7. 希望の納期はありますか？</label>
-                <input type="text" name="Q7_希望納期" class="form-input" placeholder="例：来月の中旬まで、など">
+                <input type="text" name="Q7_希望納期" class="form-input">
             </div>
 
             <div class="submit-area">
-                <button type="submit" class="submit-btn">相談を送信する</button>
+                <button type="submit" id="submit-button" class="submit-btn">相談を送信する</button>
             </div>
         </form>
     </section>
+
+    <script>
+        const form = document.getElementById("resonance-form");
+        const button = document.getElementById("submit-button");
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            button.disabled = true;
+            button.innerText = "送信中...";
+
+            const data = new FormData(event.target);
+            
+            // 重要：xxxxxx をご自身のFormspree IDに書き換えてください
+            fetch("https://formspree.io/f/mdawndoz", {
+                method: "POST",
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // 送信成功時にサンクスページへリダイレクト
+                    window.location.href = "thanks.html";
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("送信に失敗しました。時間をおいて再度お試しください。");
+                        }
+                        button.disabled = false;
+                        button.innerText = "相談を送信する";
+                    })
+                }
+            }).catch(error => {
+                alert("接続に失敗しました。ネットワーク環境をご確認ください。");
+                button.disabled = false;
+                button.innerText = "相談を送信する";
+            });
+        }
+        form.addEventListener("submit", handleSubmit);
+    </script>
 </body>
 </html>
