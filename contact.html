@@ -10,19 +10,29 @@
         body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); line-height: 1.8; }
         header { padding: 32px 40px; display: flex; justify-content: space-between; }
         .logo { font-weight: 700; letter-spacing: 0.4em; font-size: 1rem; text-decoration: none; color: var(--text-color); }
-        .contact { padding: 60px 24px; max-width: 800px; margin: 0 auto; }
+        .contact { padding: 60px 24px; max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
         .contact-header { text-align: center; margin-bottom: 64px; }
         .identity-title { font-family: var(--font-serif); font-size: 2.2rem; letter-spacing: 0.2em; margin-bottom: 16px; }
         .contact-header p { font-size: 0.95rem; color: var(--sub-text); }
+        
         .form-group { margin-bottom: 56px; }
         .form-label { display: block; font-size: 1rem; margin-bottom: 16px; font-weight: 600; }
         .form-label span { font-size: 0.85rem; color: var(--sub-text); display: block; margin-top: 8px; font-weight: 400; }
-        .form-input, .form-textarea { width: 100%; background: #FFFFFF; border: 1px solid #EAEAEA; padding: 20px; color: var(--text-color); font-family: inherit; font-size: 1rem; transition: border-color 0.3s; }
+        
+        /* Input Styles */
+        .form-input, .form-textarea { 
+            width: 100%; background: #FFFFFF; border: 1px solid #EAEAEA; 
+            padding: 20px; color: var(--text-color); font-family: inherit; font-size: 1rem; 
+            transition: border-color 0.3s; 
+        }
         .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-color); }
+        
         .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
         .checkbox-label { background: #FFFFFF; border: 1px solid #EAEAEA; padding: 16px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; text-align: center; }
         .checkbox-input { display: none; }
         .checkbox-input:checked + .checkbox-label { border-color: var(--accent-color); background: rgba(212, 163, 115, 0.05); color: var(--accent-color); font-weight: 600; }
+        
         .submit-area { text-align: center; margin-top: 80px; }
         .submit-btn { background: var(--text-color); color: var(--bg-color); border: none; padding: 24px 80px; font-size: 0.9rem; letter-spacing: 0.3em; cursor: pointer; transition: all 0.5s; font-weight: 600; }
         .submit-btn:hover { opacity: 0.8; transform: translateY(-2px); }
@@ -37,28 +47,70 @@
             <h2 class="identity-title">ヒアリングシート</h2>
             <p>あなたの想いを最短距離で現実にするために、<br>今の状況をありのままに教えてください。</p>
         </div>
-        <form>
-            <div class="form-group"><label class="form-label">Q1. 実現したいことは何ですか？<span>（例：認知度向上、売上アップ、ブランディング等。断片的で構いません）</span></label><textarea class="form-textarea" rows="4"></textarea></div>
-            <div class="form-group"><label class="form-label">Q2. 今、どのくらいまで決まっていますか？</label><div class="checkbox-group">
-                <input type="radio" name="q2" id="q2-1" class="checkbox-input"><label for="q2-1" class="checkbox-label">【アイデア段階】</label>
-                <input type="radio" name="q2" id="q2-2" class="checkbox-input"><label for="q2-2" class="checkbox-label">【準備中】</label>
-                <input type="radio" name="q2" id="q2-3" class="checkbox-input"><label for="q2-3" class="checkbox-label">【リニューアル】</label>
-            </div></div>
-            <div class="form-group"><label class="form-label">Q3. どんな人に見てほしいですか？</label><input type="text" class="form-input" placeholder="例：30代の働く女性、近所の法人の方など"></div>
-            <div class="form-group"><label class="form-label">Q4. 参考サイトや好きなデザインはありますか？</label><input type="text" class="form-input" placeholder="URLやキーワードなど"></div>
-            <div class="form-group"><label class="form-label">Q5. どのプランに興味がありますか？</label><div class="checkbox-group">
-                <input type="radio" name="q5" id="q5-1" class="checkbox-input"><label for="q5-1" class="checkbox-label">検証の1ページ（50万円〜）</label>
-                <input type="radio" name="q5" id="q5-2" class="checkbox-input"><label for="q5-2" class="checkbox-label">信頼の母体（120万円〜）</label>
-                <input type="radio" name="q5" id="q5-3" class="checkbox-input"><label for="q5-3" class="checkbox-label">資産の創出（300万円〜）</label>
-                <input type="radio" name="q5" id="q5-4" class="checkbox-input"><label for="q5-4" class="checkbox-label">相談して決めたい</label>
-            </div></div>
-            <div class="form-group"><label class="form-label">Q6. どの部分を任せたいですか？（複数選択可）</label><div class="checkbox-group">
-                <input type="checkbox" id="q6-1" class="checkbox-input"><label for="q6-1" class="checkbox-label">企画・おまかせ</label>
-                <input type="checkbox" id="q6-2" class="checkbox-input"><label for="q6-2" class="checkbox-label">制作・デザイン</label>
-                <input type="checkbox" id="q6-3" class="checkbox-input"><label for="q6-3" class="checkbox-label">管理・改善</label>
-            </div></div>
-            <div class="form-group"><label class="form-label">Q7. 希望の納期はありますか？</label><input type="text" class="form-input" placeholder="例：来月の中旬まで、など"></div>
-            <div class="submit-area"><button type="submit" class="submit-btn">相談を送信する</button></div>
+
+        <form action="#" method="POST">
+            
+            <div class="form-group">
+                <label class="form-label">お名前 / 企業名</label>
+                <input type="text" name="name" class="form-input" required placeholder="例：株式会社共鳴 / 山田 太郎">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">メールアドレス</label>
+                <input type="email" name="email" class="form-input" required placeholder="example@resonance.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q1. 実現したいことは何ですか？<span>（例：認知度向上、売上アップ、ブランディング等）</span></label>
+                <textarea name="vision" class="form-textarea" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q2. 今、どのくらいまで決まっていますか？</label>
+                <div class="checkbox-group">
+                    <input type="radio" name="status" id="q2-1" value="アイデア段階" class="checkbox-input"><label for="q2-1" class="checkbox-label">【アイデア段階】</label>
+                    <input type="radio" name="status" id="q2-2" value="準備中" class="checkbox-input"><label for="q2-2" class="checkbox-label">【準備中】</label>
+                    <input type="radio" name="status" id="q2-3" value="リニューアル" class="checkbox-input"><label for="q2-3" class="checkbox-label">【リニューアル】</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q3. どんな人に見てほしいですか？</label>
+                <input type="text" name="target" class="form-input" placeholder="例：30代の働く女性、近所の法人の方など">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q4. 参考サイトや好きなデザインはありますか？</label>
+                <input type="text" name="reference" class="form-input" placeholder="URLやキーワードなど">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q5. どのプランに興味がありますか？</label>
+                <div class="checkbox-group">
+                    <input type="radio" name="plan" id="q5-1" value="検証の1ページ" class="checkbox-input"><label for="q5-1" class="checkbox-label">検証の1ページ</label>
+                    <input type="radio" name="q5" id="q5-2" value="信頼の母体" class="checkbox-input"><label for="q5-2" class="checkbox-label">信頼の母体</label>
+                    <input type="radio" name="q5" id="q5-3" value="資産の創出" class="checkbox-input"><label for="q5-3" class="checkbox-label">資産の創出</label>
+                    <input type="radio" name="q5" id="q5-4" value="相談して決めたい" class="checkbox-input"><label for="q5-4" class="checkbox-label">相談して決めたい</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q6. どの部分を任せたいですか？（複数選択可）</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="scope" value="企画" id="q6-1" class="checkbox-input"><label for="q6-1" class="checkbox-label">企画・おまかせ</label>
+                    <input type="checkbox" name="scope" value="制作" id="q6-2" class="checkbox-input"><label for="q6-2" class="checkbox-label">制作・デザイン</label>
+                    <input type="checkbox" name="scope" value="管理" id="q6-3" class="checkbox-input"><label for="q6-3" class="checkbox-label">管理・改善</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Q7. 希望の納期はありますか？</label>
+                <input type="text" name="deadline" class="form-input" placeholder="例：来月の中旬まで、など">
+            </div>
+
+            <div class="submit-area">
+                <button type="submit" class="submit-btn">相談を送信する</button>
+            </div>
         </form>
     </section>
 </body>
