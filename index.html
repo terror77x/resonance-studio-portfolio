@@ -7,88 +7,106 @@
     <style>
         :root {
             --bg-color: #F9F7F2;
+            --bg-pure: #FFFFFF;
             --text-color: #1A1A1A;
             --accent-color: #D4A373;
             --sub-text: #666666;
-            --font-main: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            --font-serif: "Yu Mincho", "YuMincho", "MS Mincho", serif;
-            --section-padding: 120px 24px;
+            --font-main: "Helvetica Neue", Arial, sans-serif;
+            --font-serif: "Yu Mincho", "YuMincho", serif;
+            --spacing-unit: clamp(60px, 10vw, 140px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); line-height: 1.8; overflow-x: hidden; }
 
-        /* --- Background --- */
-        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(100px); opacity: 0.4; pointer-events: none; }
-        .fluid-blob { position: absolute; width: 70vw; height: 70vw; border-radius: 50%; animation: move 30s infinite alternate ease-in-out; }
-        @keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 30%); } }
+        /* --- Global Animations --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- Background Fluid --- */
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(100px); opacity: 0.3; pointer-events: none; }
+        .fluid-blob { position: absolute; width: 60vw; height: 60vw; border-radius: 50%; animation: move 30s infinite alternate ease-in-out; }
+        @keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
 
         /* --- Header --- */
         header { 
-            position: fixed; top: 0; left: 0; width: 100%; padding: 24px 40px; z-index: 1000; 
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; z-index: 1000; 
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(249, 247, 242, 0.85); backdrop-filter: blur(15px);
+            background: rgba(249, 247, 242, 0.8); backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .logo { font-weight: 700; letter-spacing: 0.4em; font-size: 1rem; text-decoration: none; color: var(--text-color); }
-        nav a { text-decoration: none; color: var(--text-color); font-size: 0.65rem; letter-spacing: 0.2em; margin-left: 24px; font-weight: 700; text-transform: uppercase; }
+        .logo { font-weight: 700; letter-spacing: 0.4em; font-size: 0.9rem; text-decoration: none; color: var(--text-color); }
+        nav a { text-decoration: none; color: var(--text-color); font-size: 0.65rem; letter-spacing: 0.2em; margin-left: 28px; font-weight: 700; text-transform: uppercase; }
 
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .section-label { font-size: 0.65rem; letter-spacing: 0.5em; color: var(--accent-color); margin-bottom: 48px; text-transform: uppercase; text-align: center; display: block; font-weight: 800; }
+        /* --- Section Common --- */
+        section { padding: var(--spacing-unit) 24px; position: relative; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-label { font-size: 0.65rem; letter-spacing: 0.5em; color: var(--accent-color); margin-bottom: 32px; text-transform: uppercase; display: block; font-weight: 800; text-align: center; }
+        .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 60px; text-align: center; letter-spacing: 0.15em; line-height: 1.4; }
 
         /* --- Hero --- */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 24px; }
-        .hero-main-copy { font-family: var(--font-serif); font-size: clamp(2rem, 8vw, 3.8rem); font-weight: 500; letter-spacing: 0.15em; margin-bottom: 40px; }
-        .cta-button { display: inline-block; padding: 22px 64px; border: 1px solid var(--text-color); color: var(--text-color); text-decoration: none; letter-spacing: 0.3em; font-size: 0.8rem; font-weight: 700; transition: all 0.5s; background: transparent; }
-        .cta-button:hover { background-color: var(--text-color); color: var(--bg-color); }
+        .hero-main-copy { font-family: var(--font-serif); font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 500; letter-spacing: 0.15em; margin-bottom: 32px; }
+        .hero-sub-copy { font-size: clamp(0.95rem, 2.5vw, 1.2rem); color: var(--sub-text); max-width: 650px; margin-bottom: 56px; line-height: 2; }
+        .hero-sub-copy span { color: var(--text-color); font-weight: 600; border-bottom: 1px solid var(--accent-color); }
+        .cta-button { display: inline-block; padding: 22px 64px; border: 1px solid var(--text-color); color: var(--text-color); text-decoration: none; letter-spacing: 0.3em; font-size: 0.8rem; font-weight: 700; transition: 0.4s; background: transparent; }
+        .cta-button:hover { background-color: var(--text-color); color: var(--bg-pure); }
 
-        /* --- Cases (Portfolio) --- */
-        .cases { padding: var(--section-padding); max-width: 1200px; margin: 0 auto; }
-        .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-        .case-card { position: relative; overflow: hidden; background: #fff; border: 1px solid #eee; transition: 0.5s; }
-        .case-card:hover { transform: translateY(-10px); border-color: var(--accent-color); }
-        .case-img { width: 100%; height: 250px; background: #f0f0f0; overflow: hidden; }
-        .case-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 1s; }
-        .case-card:hover .case-img img { filter: grayscale(0%); transform: scale(1.05); }
-        .case-info { padding: 32px; }
-        .case-tag { font-size: 0.65rem; color: var(--accent-color); letter-spacing: 0.2em; margin-bottom: 12px; display: block; font-weight: 700; }
-        .case-title { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 16px; }
-        .case-desc { font-size: 0.9rem; color: var(--sub-text); }
+        /* --- Identity: Balanced layout --- */
+        .identity { background: var(--bg-pure); }
+        .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .identity-image { width: 100%; height: 500px; background: #f0f0f0; overflow: hidden; }
+        .identity-image img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%); }
+        .identity-text { font-size: 1.1rem; line-height: 2.2; color: var(--sub-text); }
+        .identity-text strong { color: var(--text-color); font-weight: 700; }
 
-        /* --- Support --- */
-        .support { padding: var(--section-padding); background: #fff; text-align: center; }
-        .support-grid { max-width: 1000px; margin: 64px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
-        .support-item h3 { font-size: 1.1rem; margin-bottom: 16px; letter-spacing: 0.1em; }
-        .support-item p { font-size: 0.9rem; color: var(--sub-text); }
+        /* --- Cases: Horizontal Scannability --- */
+        .cases { background: var(--bg-color); }
+        .case-card { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; margin-bottom: 60px; background: var(--bg-pure); padding: 40px; border: 1px solid #eee; }
+        .case-card:nth-child(even) { direction: rtl; }
+        .case-card:nth-child(even) .case-info { direction: ltr; text-align: left; }
+        .case-img-small { width: 100%; height: 300px; overflow: hidden; }
+        .case-img-small img { width: 100%; height: 100%; object-fit: cover; }
+        .case-tag { font-size: 0.6rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.3em; margin-bottom: 16px; display: block; }
+        .case-title { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 24px; }
 
-        /* (Other styles identical to previous version for brevity) */
-        .identity { padding: var(--section-padding); display: flex; flex-direction: column; align-items: center; }
-        .identity-content { max-width: 1100px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
-        .identity-image { width: 100%; height: 500px; overflow: hidden; }
-        .identity-image img { width: 100%; height: 100%; object-fit: cover; }
-        .identity-title { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 32px; letter-spacing: 0.2em; }
-        
-        .packages { padding: var(--section-padding); max-width: 1300px; margin: 0 auto; }
-        .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
-        .package-card { background: #fff; border: 1px solid #eee; padding: 60px 40px; transition: 0.5s; }
-        .package-name { font-size: 1.5rem; margin-bottom: 12px; font-family: var(--font-serif); }
-        
-        .process { padding: var(--section-padding); max-width: 900px; margin: 0 auto; }
-        .process-list { border-left: 1px solid #eee; padding-left: 48px; position: relative; }
+        /* --- Services & Support: Compact & Clear --- */
+        .services { background: var(--bg-pure); }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .service-card { padding: 50px 32px; border: 1px solid #f0f0f0; transition: 0.4s; }
+        .service-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+        .service-name { font-size: 1.4rem; font-family: var(--font-serif); margin-bottom: 16px; }
+        .service-price { font-size: 1.8rem; margin-bottom: 32px; font-weight: 500; }
+        .service-features { list-style: none; font-size: 0.85rem; color: var(--sub-text); border-top: 1px solid #f9f9f9; padding-top: 24px; }
+        .service-features li { margin-bottom: 12px; }
+
+        .support-strip { margin-top: 80px; padding: 40px; background: var(--bg-color); text-align: center; border: 1px dashed var(--accent-color); }
+        .support-strip p { font-size: 0.9rem; color: var(--sub-text); max-width: 700px; margin: 0 auto; }
+
+        /* --- Process --- */
+        .process { background: var(--bg-pure); }
+        .process-list { border-left: 1px solid #eee; padding-left: 48px; position: relative; max-width: 800px; margin: 0 auto; }
         .process-item { position: relative; margin-bottom: 80px; }
-        .process-dot { position: absolute; left: -59px; top: 6px; width: 20px; height: 20px; background: var(--bg-color); border: 2px solid #eee; border-radius: 50%; z-index: 1; transition: 0.6s; }
-        .process-item.active .process-dot { background: var(--accent-color); border-color: var(--accent-color); }
+        .process-dot { position: absolute; left: -59px; top: 6px; width: 22px; height: 22px; background: var(--bg-pure); border: 2px solid #eee; border-radius: 50%; z-index: 1; transition: 0.6s; }
+        .process-item.active .process-dot { background: var(--accent-color); border-color: var(--accent-color); transform: scale(1.2); }
+        .process-head { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
 
-        footer { padding: 100px 24px; text-align: center; border-top: 1px solid #eee; background: #fff; }
-        @media (max-width: 900px) { .identity-content { grid-template-columns: 1fr; text-align: center; } .identity-image { height: 350px; order: 2; } .identity-title { text-align: center; } }
+        /* --- Footer --- */
+        footer { padding: 100px 24px; text-align: center; background: var(--bg-pure); border-top: 1px solid #eee; }
+
+        @media (max-width: 850px) {
+            .identity-grid, .case-card { grid-template-columns: 1fr; gap: 40px; }
+            .case-card { padding: 24px; }
+            .case-card:nth-child(even) { direction: ltr; }
+            .hero-main-copy { font-size: 2.2rem; }
+            nav { display: none; }
+        }
     </style>
 </head>
 <body>
     <div id="canvas-container">
         <div class="fluid-blob" style="top: -10%; left: -10%; background: radial-gradient(circle, #D4A37310 0%, transparent 70%);"></div>
-        <div class="fluid-blob" style="bottom: -10%; right: -10%; background: radial-gradient(circle, #2F3E4605 0%, transparent 70%);"></div>
     </div>
 
     <header>
@@ -96,8 +114,8 @@
         <nav>
             <a href="#identity">Concept</a>
             <a href="#cases">Cases</a>
-            <a href="#packages">Services</a>
-            <a href="#support">Support</a>
+            <a href="#services">Services</a>
+            <a href="#process">Flow</a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
@@ -105,131 +123,147 @@
     <section class="hero">
         <h1 class="hero-main-copy reveal active">あなたの「想い」を、<br>明日には「現実」へ。</h1>
         <p class="hero-sub-copy reveal active" style="transition-delay: 0.4s;">
-            <span>制作会社は、もういらない。</span>私たちが、あなたのビジネスを<br>あっという間に資産に変える。
+            <span>制作会社は、もういらない。</span><br>
+            私たちが、あなたのビジネスをあっという間に資産に変える。
         </p>
         <a href="contact.html" class="cta-button reveal active" style="transition-delay: 0.8s;">相談を開始する</a>
     </section>
 
     <section id="identity" class="identity">
-        <div class="section-label reveal">Our Identity</div>
-        <div class="identity-content">
-            <div class="identity-image reveal">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200" alt="Core Concept">
-            </div>
-            <div class="identity-info">
-                <h2 class="identity-title reveal">制作ではなく、<br>「共鳴」を。</h2>
-                <div class="identity-text reveal">
-                    <p>あなたの想いを私が受け取り、AIが即座に反映します。<br><br>一切の無駄を削ぎ落とした、<strong>私とAIだけだからこその</strong>圧倒的なスピードと純度。それがRESONANCEの在り方です。</p>
+        <div class="container">
+            <span class="section-label reveal">Identity</span>
+            <div class="identity-grid">
+                <div class="identity-image reveal">
+                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200" alt="Concept">
+                </div>
+                <div class="identity-info reveal">
+                    <h2 class="section-title" style="text-align: left;">制作ではなく、<br>「共鳴」を。</h2>
+                    <p class="identity-text">
+                        あなたの想いを私が受け取り、AIが即座に反映します。<br><br>
+                        一切の無駄を削ぎ落とした、<strong>私とAIだけだからこその</strong>圧倒的なスピードと純度。それがRESONANCEの在り方です。
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="cases" class="cases">
-        <div class="section-label reveal">Resonance Cases</div>
-        <div class="case-grid">
+        <div class="container">
+            <span class="section-label reveal">Resonance Cases</span>
+            <h2 class="section-title reveal">共鳴が、結果を加速させた事例。</h2>
+            
             <div class="case-card reveal">
-                <div class="case-img"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600" alt="Case 1"></div>
+                <div class="case-img-small"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600" alt="Case 1"></div>
                 <div class="case-info">
                     <span class="case-tag">VERIFICATION</span>
-                    <h3 class="case-title">伝統を「今」へ繋ぐ。</h3>
-                    <p class="case-desc">老舗茶舗の新事業。伝統の哲学をAIが解析し、3日でスマホ世代へ響くLPへ具現化。公開直後から目標の2倍の成約を記録。</p>
+                    <h3 class="case-title">伝統を「今」へ繋ぐ、老舗茶舗。</h3>
+                    <p class="case-desc">伝統の哲学をAIが解析し、3日でスマホ世代へ響くLPへ具現化。公開直後から目標の2倍の成約を記録。</p>
                 </div>
             </div>
-            <div class="case-card reveal" style="transition-delay: 0.2s;">
-                <div class="case-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" alt="Case 2"></div>
+
+            <div class="case-card reveal">
+                <div class="case-img-small"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" alt="Case 2"></div>
                 <div class="case-info">
                     <span class="case-tag">RELIABILITY</span>
-                    <h3 class="case-title">専門性を「信頼」へ。</h3>
-                    <p class="case-desc">特化型税理士事務所。24時間稼働のAI接客を導入し、敷居の高さを払拭。問い合わせ率を前年比400%へと加速。</p>
-                </div>
-            </div>
-            <div class="case-card reveal" style="transition-delay: 0.4s;">
-                <div class="case-img"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" alt="Case 3"></div>
-                <div class="case-info">
-                    <span class="case-tag">INNOVATION</span>
-                    <h3 class="case-title">価値を「世界」へ。</h3>
-                    <p class="case-desc">工芸品マーケット。多言語AIと物流を統合し、海外売上が5割を超えるグローバル資産へと進化。</p>
+                    <h3 class="case-title">専門性を「信頼」へ、税理士事務所。</h3>
+                    <p class="case-desc">24時間稼働のAI自動接客を導入し、敷居の高さを払拭。問い合わせ率を前年比400%へと加速。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="packages" class="packages">
-        <div class="section-label reveal">Services</div>
-        <div class="package-grid">
-            <div class="package-card reveal">
-                <p class="package-type">Verification</p>
-                <h3 class="package-name">検証の1ページ</h3>
-                <p class="package-price">¥500,000<span>〜</span></p>
-                <ul class="package-features">
-                    <li>戦略的ランディングページ制作</li>
-                    <li>AIによる高精度コピーライティング</li>
-                    <li>最短3日〜1週間の超短期納品</li>
-                </ul>
+    <section id="services" class="services">
+        <div class="container">
+            <span class="section-label reveal">Services</span>
+            <h2 class="section-title reveal">目的から選ぶ、3つのパッケージ。</h2>
+            
+            <div class="service-grid">
+                <div class="service-card reveal">
+                    <h3 class="service-name">検証の1ページ</h3>
+                    <p class="service-price">¥500,000〜</p>
+                    <ul class="service-features">
+                        <li>戦略的ランディングページ</li>
+                        <li>AI高精度コピーライティング</li>
+                        <li>最短3日〜1週間の超短期納品</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.2s; border-color: var(--accent-color);">
+                    <h3 class="service-name">信頼の母体</h3>
+                    <p class="service-price">¥1,200,000〜</p>
+                    <ul class="service-features">
+                        <li>中規模ブランドサイト（5〜8P）</li>
+                        <li>AI自動接客・ボット導入</li>
+                        <li>検索上位を狙うSEO構造設計</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.4s;">
+                    <h3 class="service-name">資産の創出</h3>
+                    <p class="service-price">¥3,000,000〜</p>
+                    <ul class="service-features">
+                        <li>フルオーダーAIシステム開発</li>
+                        <li>半年間の継続改善コンサル</li>
+                        <li>ビジネスモデルのデジタル最適化</li>
+                    </ul>
+                </div>
             </div>
-            <div class="package-card reveal" style="transition-delay: 0.2s; border-color: var(--accent-color);">
-                <p class="package-type">Reliability</p>
-                <h3 class="package-name">信頼の母体</h3>
-                <p class="package-price">¥1,200,000<span>〜</span></p>
-                <ul class="package-features">
-                    <li>中規模ブランドサイト（5〜8P）</li>
-                    <li>AI自動接客・チャットボット導入</li>
-                    <li>検索上位を狙うSEO構造設計</li>
-                </ul>
-            </div>
-            <div class="package-card reveal" style="transition-delay: 0.4s;">
-                <p class="package-type">Innovation</p>
-                <h3 class="package-name">資産の創出</h3>
-                <p class="package-price">¥3,000,000<span>〜</span></p>
-                <ul class="package-features">
-                    <li>フルオーダーAIシステム開発</li>
-                    <li>半年間の継続改善コンサルティング</li>
-                    <li>ビジネスモデルのデジタル最適化</li>
-                </ul>
-            </div>
-        </div>
-    </section>
 
-    <section id="support" class="support">
-        <div class="section-label reveal">Living Asset Support</div>
-        <h2 class="identity-title reveal">資産を、育て続ける。</h2>
-        <div class="support-grid reveal">
-            <div class="support-item">
-                <h3>AI解析・改善提案</h3>
-                <p>毎月のアクセスデータをAIが解析し、次なる「打ち手」をレポート。サイトを放置させず、常に進化させます。</p>
-            </div>
-            <div class="support-item">
-                <h3>適応型アップデート</h3>
-                <p>市場の変化に合わせ、文言の微調整や最新のAI機能を迅速に導入。常に最先端の体験を維持します。</p>
-            </div>
-            <div class="support-item">
-                <h3>安全なインフラ管理</h3>
-                <p>サーバー監視、ドメイン管理、セキュリティ更新を代行。あなたはビジネスの決断だけに集中できます。</p>
+            <div class="support-strip reveal">
+                <h4 style="font-size: 0.8rem; letter-spacing: 0.2em; margin-bottom: 16px;">LIVING ASSET SUPPORT</h4>
+                <p>公開はゴールではありません。AI解析による毎月の改善提案、市場の変化に合わせた迅速なアップデート、安全なインフラ管理を<strong>月額¥50,000〜</strong>でお引き受けします。</p>
             </div>
         </div>
-        <p class="reveal" style="margin-top: 48px; color: var(--accent-color); font-weight: 700;">月額 ¥50,000 〜</p>
     </section>
 
     <section id="process" class="process">
-        <div class="section-label reveal">Flow</div>
-        <h2 class="process-title reveal">理想を現実に導く、<br>4つのステップ。</h2>
-        <div class="process-list">
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 01</span><h3 class="process-head">正解の特定</h3><p class="process-desc">対話を通じて迷いをゼロにします。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 02</span><h3 class="process-head">実物の提示</h3><p class="process-desc">24h以内に触れる試作を提示。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 03</span><h3 class="process-head">究極の実装</h3><p class="process-desc">1pxの妥協もなく完璧に磨き上げます。</p></div>
-            <div class="process-item reveal"><div class="process-dot"></div><span class="process-step">STEP 04</span><h3 class="process-head">資産の始動</h3><p class="process-desc">公開即、ビジネスが自律稼働します。</p></div>
+        <div class="container">
+            <span class="section-label reveal">How we work</span>
+            <h2 class="section-title reveal">理想を現実に導く、4つのステップ。</h2>
+            <div class="process-list">
+                <div class="process-item reveal">
+                    <div class="process-dot"></div>
+                    <p style="font-size: 0.7rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.1em;">STEP 01</p>
+                    <h3 class="process-head">正解の特定</h3>
+                    <p class="process-desc" style="color: var(--sub-text);">対話を通じて、迷いをゼロにします。</p>
+                </div>
+                <div class="process-item reveal">
+                    <div class="process-dot"></div>
+                    <p style="font-size: 0.7rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.1em;">STEP 02</p>
+                    <h3 class="process-head">実物の提示</h3>
+                    <p class="process-desc" style="color: var(--sub-text);">24h以内に、触れるプロトタイプを提示します。</p>
+                </div>
+                <div class="process-item reveal">
+                    <div class="process-dot"></div>
+                    <p style="font-size: 0.7rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.1em;">STEP 03</p>
+                    <h3 class="process-head">究極の実装</h3>
+                    <p class="process-desc" style="color: var(--sub-text);">1pxの妥協もなく、完璧な形へ磨き上げます。</p>
+                </div>
+                <div class="process-item reveal">
+                    <div class="process-dot"></div>
+                    <p style="font-size: 0.7rem; color: var(--accent-color); font-weight: 800; letter-spacing: 0.1em;">STEP 04</p>
+                    <h3 class="process-head">資産の始動</h3>
+                    <p class="process-desc" style="color: var(--sub-text);">公開した瞬間から、ビジネスが動き出します。</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 100px;">
+                <a href="contact.html" class="cta-button">相談を開始する</a>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="logo" style="margin-bottom: 32px;">RESONANCE</div>
-        <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--sub-text);">© 2026 RESONANCE. All Rights Reserved.</p>
+        <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sub-text);">© 2026 RESONANCE. All Rights Reserved.</p>
     </footer>
 
     <script>
-        document.addEventListener('mousemove', (e) => { const moveX = (e.clientX - window.innerWidth / 2) * 0.01; const moveY = (e.clientY - window.innerHeight / 2) * 0.01; document.querySelector('#canvas-container').style.transform = `translate(${moveX}px, ${moveY}px)`; });
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+        document.addEventListener('mousemove', (e) => { 
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01; 
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01; 
+            document.querySelector('#canvas-container').style.transform = `translate(${moveX}px, ${moveY}px)`; 
+        });
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); 
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .process-item').forEach(el => observer.observe(el));
     </script>
 </body>
