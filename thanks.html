@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | RESONANCE</title>
+    <style>
+        :root {
+            --bg-color: #F9F7F2;
+            --text-color: #1A1A1A;
+            --accent-color: #D4A373;
+            --sub-text: #666666;
+            --font-main: "Helvetica Neue", Arial, sans-serif;
+            --font-serif: "Yu Mincho", serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: var(--font-main); 
+            line-height: 1.8; 
+            overflow: hidden; /* 背景演出のため */
+        }
+
+        /* --- Background Effect (Consistency) --- */
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; filter: blur(100px); opacity: 0.4; }
+        .fluid-blob { position: absolute; width: 60vw; height: 60vw; border-radius: 50%; animation: move 25s infinite alternate ease-in-out; }
+        @keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+
+        header { padding: 32px 40px; }
+        .logo { font-weight: 700; letter-spacing: 0.4em; font-size: 1rem; text-decoration: none; color: var(--text-color); }
+
+        /* --- Content --- */
+        .thanks-container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.2s forwards cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        .thanks-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            letter-spacing: 0.2em;
+            margin-bottom: 32px;
+        }
+
+        .thanks-text {
+            color: var(--sub-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 56px;
+        }
+
+        .thanks-text strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 56px;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.5s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Symbol icon */
+        .check-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <div class="fluid-blob" style="top: 10%; left: 10%; background: radial-gradient(circle, #D4A37315 0%, transparent 70%);"></div>
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">RESONANCE</a>
+    </header>
+
+    <main class="thanks-container">
+        <div class="check-icon">✓</div>
+        <h1 class="thanks-title">想いを受け取りました。</h1>
+        <p class="thanks-text">
+            ヒアリングシートをお送りいただき、ありがとうございます。<br>
+            共鳴の第一歩として、<strong>24時間以内に代表の私より</strong><br class="mobile-br">
+            最初のご提案をメールにてお届けいたします。
+        </p>
+        <a href="index.html" class="cta-button">HOMEに戻る</a>
+    </main>
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            document.querySelector('#canvas-container').style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
+</body>
+</html>
