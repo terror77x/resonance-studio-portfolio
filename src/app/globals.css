@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0B192C;
+  --color-navy-light: #1A365D;
+  --color-resonance: #E67E22; /* Warm Orange/Gold */
+  --color-resonance-light: #F39C12;
+  --color-background: #FAFAFA; /* Off white for soft minimal look */
+  --color-foreground: #0B192C; /* Navy text on light background */
+  
+  --font-sans: var(--font-noto-sans-jp), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-playfair), ui-serif, system-ui, serif;
+}
+
+/* Custom base styles */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
