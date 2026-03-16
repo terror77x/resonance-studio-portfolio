@@ -10,13 +10,13 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         <motion.h1 
-          className="text-4xl md:text-5xl lg:text-7xl font-bold font-heading leading-tight tracking-tight mb-8"
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading leading-normal tracking-tight mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          WEB制作の「めんどくさい」<br className="hidden sm:block" />
-          <span className="text-[var(--color-resonance-light)]">すべて引き受けます。</span>
+          <span className="block whitespace-nowrap">WEB制作の「めんどくさい」</span>
+          <span className="block text-[var(--color-resonance-light)] whitespace-nowrap mt-2 md:mt-4">すべて引き受けます。</span>
         </motion.h1>
 
         <motion.p 
