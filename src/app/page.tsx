@@ -5,6 +5,7 @@ import Features from "@/components/Features";
 import Works from "@/components/Works";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Works />
       <Pricing />
       <Contact />
+      <Footer />
     </main>
   );
 }
