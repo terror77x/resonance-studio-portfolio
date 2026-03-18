@@ -31,7 +31,7 @@ export default function Works() {
               category: "美容室・サロン",
               description: "ターゲットの心に寄り添うエモーショナルなコピーライティングと、清潔感あふれる洗練されたUIデザインを最速で実装したデモサイトです。",
               image: "/works/luminous.png",
-              link: "#"
+              link: "https://demo01.resonance-studio.net/"
             },
             {
               title: "Resonance Coffee（デモサイト）",
