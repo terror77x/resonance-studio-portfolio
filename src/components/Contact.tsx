@@ -26,7 +26,9 @@ export default function Contact() {
           </p>
 
           <a
-            href="#"
+            href="https://forms.gle/c5trw8g5KDkuAf8fA"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center justify-center px-8 md:px-12 py-5 md:py-6 text-lg md:text-xl font-bold text-[var(--color-navy)] bg-white hover:bg-gray-50 transition-all duration-300 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] hover:-translate-y-1"
           >
             ご相談・ご依頼はこちら

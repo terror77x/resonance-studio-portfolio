@@ -32,13 +32,6 @@ export default function Works() {
               description: "ターゲットの心に寄り添うエモーショナルなコピーライティングと、清潔感あふれる洗練されたUIデザインを最速で実装したデモサイトです。",
               image: "/works/luminous.png",
               link: "https://demo01.resonance-studio.net/"
-            },
-            {
-              title: "Resonance Coffee（デモサイト）",
-              category: "カフェ・飲食店",
-              description: "静寂と共鳴をテーマにした、高級感あふれるカフェのブランドサイト。シネマティックなビジュアル表現と、ブランドの物語を伝えるタイポグラフィが特徴です。",
-              image: "/works/coffee.png",
-              link: "#"
             }
           ].map((work, index) => (
             <motion.div
