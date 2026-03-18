@@ -10,23 +10,23 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         <motion.h1 
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading leading-normal tracking-tight mb-8"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-heading leading-tight tracking-tight mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="block whitespace-nowrap">WEB制作の「めんどくさい」</span>
-          <span className="block text-[var(--color-resonance-light)] whitespace-nowrap mt-2 md:mt-4">すべて引き受けます。</span>
+          <span className="block sm:whitespace-nowrap">WEB制作の「めんどくさい」</span>
+          <span className="block text-[var(--color-resonance-light)] sm:whitespace-nowrap mt-2 md:mt-4">すべて引き受けます。</span>
         </motion.h1>
 
         <motion.p 
-          className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-10"
+          className="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-10 px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          あなたは<span className="text-white font-semibold">5分、スマホで質問に答えるだけ</span>。<br />
-          長時間の打ち合わせも、専門用語の確認も不要です。<br />
+          あなたは<span className="text-white font-semibold">5分、スマホで質問に答えるだけ</span>。<br className="hidden sm:block" />
+          長時間の打ち合わせも、専門用語の確認も不要です。<br className="hidden sm:block" />
           本業に集中している間に、あなたのビジネスを勝たせるWEBサイトをお届けします。
         </motion.p>
         
