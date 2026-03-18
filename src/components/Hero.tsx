@@ -36,7 +36,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
           <a
-            href="#contact"
+            href="https://forms.gle/c5trw8g5KDkuAf8fA"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 text-sm md:text-base font-bold text-[var(--color-navy)] bg-[var(--color-resonance)] hover:bg-[var(--color-resonance-light)] transition-colors rounded-full shadow-[0_0_20px_rgba(230,126,34,0.3)]"
           >
             ご相談・ご依頼はこちら
