@@ -64,8 +64,8 @@ export default function Pricing() {
             
             <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">LP・シングルページプラン</h3>
             <div className="mb-8">
-              <span className="text-4xl md:text-5xl font-bold text-[var(--color-navy)]">¥98,000</span>
-              <span className="text-gray-500 font-medium ml-2">（税込）</span>
+              <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)]">¥98,000</span>
+              <span className="text-gray-500 font-medium ml-2 text-sm">（税込）</span>
             </div>
             
             <ul className="space-y-4 mb-8 flex-1 text-gray-700">
@@ -93,8 +93,8 @@ export default function Pricing() {
             
             <h3 className="text-2xl font-bold text-white mb-2">コーポレート・スタンダードプラン</h3>
             <div className="mb-8">
-              <span className="text-4xl md:text-5xl font-bold text-white">¥298,000</span>
-              <span className="text-gray-400 font-medium ml-2">（税込）</span>
+              <span className="text-3xl md:text-4xl font-bold text-white">¥298,000</span>
+              <span className="text-gray-400 font-medium ml-2 text-sm">（税込）</span>
             </div>
             
             <ul className="space-y-4 mb-8 flex-1 text-gray-200">
@@ -123,14 +123,13 @@ export default function Pricing() {
             
             <div className="flex justify-between items-start mb-6">
               <span className="inline-block bg-[var(--color-navy)] text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Premium</span>
-              <span className="inline-block bg-[var(--color-resonance)] text-[var(--color-navy)] font-bold text-[10px] px-2 py-0.5 rounded shadow-sm">RECOMMENDED</span>
             </div>
             
             <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">プレミアム・カスタムプラン</h3>
             <div className="mb-8 flex items-baseline">
               <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)]">¥598,000</span>
               <span className="text-xl md:text-2xl font-bold text-[var(--color-navy)] ml-0.5">〜</span>
-              <span className="text-gray-500 font-medium ml-2 text-sm underline-offset-4 decoration-gray-300">（税込）</span>
+              <span className="text-gray-500 font-medium ml-2 text-sm">（税込）</span>
             </div>
             
             <p className="text-sm font-bold text-[var(--color-resonance)] mb-6">
@@ -173,10 +172,10 @@ export default function Pricing() {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 「作って終わり」ではなく、公開後のちょっとしたテキスト変更や画像の差し替えなど、日々の運用をサポートします。専門知識がなくても、常に最新の情報を発信し続けることが可能です。
               </p>
-              <div className="flex items-baseline justify-center md:justify-start gap-2">
-                <span className="text-gray-500 font-medium">月額</span>
-                <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)]">¥10,000〜</span>
-                <span className="text-gray-500 text-sm">（税込）</span>
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <span className="text-gray-500 font-bold text-sm bg-gray-100 px-2 py-1 rounded">月額</span>
+                <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)] leading-none">¥10,000<span className="text-xl md:text-2xl ml-0.5">〜</span></span>
+                <span className="text-gray-400 text-xs">（税込）</span>
               </div>
             </div>
 
