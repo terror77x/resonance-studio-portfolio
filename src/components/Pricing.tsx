@@ -43,14 +43,14 @@ export default function Pricing() {
             </p>
             <p>
               Resonance Studio.は、AIテクノロジーによる徹底的な効率化により、<br className="hidden md:block" />
-              高品質でありながら完全に透明化された2つのパッケージ価格を実現しました。<br className="hidden md:block" />
+              高品質でありながら完全に透明化された3つのパッケージ価格を実現しました。<br className="hidden md:block" />
               <span className="font-bold text-[var(--color-navy)]">複雑な追加費用は一切ありません。</span>
             </p>
           </div>
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -83,9 +83,9 @@ export default function Pricing() {
           </motion.div>
 
           {/* Plan 2 */}
-          <motion.div variants={item} className="flex flex-col bg-[var(--color-navy)] p-8 md:p-10 rounded-3xl border border-[var(--color-navy-light)] shadow-2xl relative overflow-hidden group">
+          <motion.div variants={item} className="flex flex-col bg-[var(--color-navy)] p-8 md:p-10 rounded-3xl border border-[var(--color-navy-light)] relative overflow-hidden group">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[var(--color-resonance)] to-[var(--color-resonance-light)]"></div>
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[var(--color-resonance)]/20 rounded-full blur-3xl group-hover:bg-[var(--color-resonance)]/30 transition-colors"></div>
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[var(--color-resonance)]/10 rounded-full blur-3xl"></div>
             
             <span className="inline-block bg-[var(--color-resonance)] text-[var(--color-navy)] font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-6 w-max">Standard</span>
             
@@ -107,6 +107,49 @@ export default function Pricing() {
               <li className="flex items-start">
                 <CheckCircle2 className="w-6 h-6 text-[var(--color-resonance-light)] shrink-0 mr-3" />
                 <span>専用フォーム回答後、最短1週間で納品。</span>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Plan 3 - Premium Custom */}
+          <motion.div 
+            variants={item} 
+            className="flex flex-col bg-white p-8 md:p-10 rounded-3xl border-2 border-[var(--color-resonance)] shadow-2xl relative overflow-hidden group scale-105 md:scale-100 lg:scale-105 z-10"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-resonance)]/5 rounded-bl-[100px] -z-10"></div>
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-[var(--color-resonance)]/10 rounded-full blur-3xl"></div>
+            
+            <div className="flex justify-between items-start mb-6">
+              <span className="inline-block bg-[var(--color-navy)] text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Premium</span>
+              <span className="inline-block bg-[var(--color-resonance)] text-[var(--color-navy)] font-bold text-[10px] px-2 py-0.5 rounded shadow-sm">RECOMMENDED</span>
+            </div>
+            
+            <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">Premium Custom</h3>
+            <div className="mb-8">
+              <span className="text-4xl md:text-5xl font-bold text-[var(--color-navy)]">¥598,000〜</span>
+              <span className="text-gray-500 font-medium ml-2">（税込）</span>
+            </div>
+            
+            <p className="text-sm font-bold text-[var(--color-resonance)] mb-6">
+              競合を圧倒する最先端のWEBサイトを求める企業様向け。
+            </p>
+            
+            <ul className="space-y-4 mb-8 flex-1 text-gray-700">
+              <li className="flex items-start">
+                <CheckCircle2 className="w-6 h-6 text-[var(--color-resonance)] shrink-0 mr-3" />
+                <span className="font-medium">Next.js等を用いたフルスクラッチ最新技術開発</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle2 className="w-6 h-6 text-[var(--color-resonance)] shrink-0 mr-3" />
+                <span>リッチなアニメーションと独自UI/UX設計</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle2 className="w-6 h-6 text-[var(--color-resonance)] shrink-0 mr-3" />
+                <span>専任AIプロンプトエンジニアによる極限の作り込み</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle2 className="w-6 h-6 text-[var(--color-resonance)] shrink-0 mr-3" />
+                <span>テキストベース＋必要に応じたオンラインすり合わせ</span>
               </li>
             </ul>
           </motion.div>
