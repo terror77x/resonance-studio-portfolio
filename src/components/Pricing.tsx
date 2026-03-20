@@ -60,6 +60,8 @@ export default function Pricing() {
           <motion.div variants={item} className="flex flex-col bg-[var(--color-background)] p-8 md:p-10 rounded-3xl border border-gray-200 hover:border-[var(--color-resonance)] transition-colors duration-300 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-resonance)]/5 rounded-bl-[100px] -z-10 group-hover:bg-[var(--color-resonance)]/10 transition-colors"></div>
             
+            <span className="inline-block bg-gray-100 text-gray-500 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-6 w-max">Light</span>
+            
             <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">LP・シングルページプラン</h3>
             <div className="mb-8">
               <span className="text-4xl md:text-5xl font-bold text-[var(--color-navy)]">¥98,000</span>
@@ -114,7 +116,7 @@ export default function Pricing() {
           {/* Plan 3 - Premium Custom */}
           <motion.div 
             variants={item} 
-            className="flex flex-col bg-white p-8 md:p-10 rounded-3xl border-2 border-[var(--color-resonance)] shadow-2xl relative overflow-hidden group scale-105 md:scale-100 lg:scale-105 z-10"
+            className="flex flex-col bg-white p-8 md:p-10 rounded-3xl border-2 border-[var(--color-resonance)] shadow-2xl relative overflow-hidden group z-10"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-resonance)]/5 rounded-bl-[100px] -z-10"></div>
             <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-[var(--color-resonance)]/10 rounded-full blur-3xl"></div>
@@ -124,10 +126,11 @@ export default function Pricing() {
               <span className="inline-block bg-[var(--color-resonance)] text-[var(--color-navy)] font-bold text-[10px] px-2 py-0.5 rounded shadow-sm">RECOMMENDED</span>
             </div>
             
-            <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">Premium Custom</h3>
-            <div className="mb-8">
-              <span className="text-4xl md:text-5xl font-bold text-[var(--color-navy)]">¥598,000〜</span>
-              <span className="text-gray-500 font-medium ml-2">（税込）</span>
+            <h3 className="text-2xl font-bold text-[var(--color-navy)] mb-2">プレミアム・カスタムプラン</h3>
+            <div className="mb-8 flex items-baseline">
+              <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)]">¥598,000</span>
+              <span className="text-xl md:text-2xl font-bold text-[var(--color-navy)] ml-0.5">〜</span>
+              <span className="text-gray-500 font-medium ml-2 text-sm underline-offset-4 decoration-gray-300">（税込）</span>
             </div>
             
             <p className="text-sm font-bold text-[var(--color-resonance)] mb-6">
