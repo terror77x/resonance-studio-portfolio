@@ -154,6 +154,52 @@ export default function Pricing() {
             </ul>
           </motion.div>
         </motion.div>
+
+        {/* Maintenance & Support Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-16 md:mt-24 max-w-4xl mx-auto"
+        >
+          <div className="bg-gray-50/50 rounded-3xl p-8 md:p-12 border border-gray-100 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="flex-1 text-center md:text-left">
+              <span className="text-[var(--color-resonance)] font-bold text-xs uppercase tracking-widest mb-2 block">Optional Plan</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-navy)] mb-4">Maintenance & Support<br className="md:hidden" /><span className="text-lg md:text-xl font-normal ml-0 md:ml-4 text-gray-500">（保守・運用サポート）</span></h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                「作って終わり」ではなく、公開後のちょっとしたテキスト変更や画像の差し替えなど、日々の運用をサポートします。専門知識がなくても、常に最新の情報を発信し続けることが可能です。
+              </p>
+              <div className="flex items-baseline justify-center md:justify-start gap-2">
+                <span className="text-gray-500 font-medium">月額</span>
+                <span className="text-3xl md:text-4xl font-bold text-[var(--color-navy)]">¥10,000〜</span>
+                <span className="text-gray-500 text-sm">（税込）</span>
+              </div>
+            </div>
+
+            <div className="w-full md:w-auto shrink-0 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+              <ul className="space-y-4 text-sm md:text-base text-gray-700">
+                <li className="flex items-center">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--color-resonance)] shrink-0 mr-3" />
+                  <span>月2回までのテキスト・画像変更の代行</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--color-resonance)] shrink-0 mr-3" />
+                  <span>システムの定期アップデート（月1回）</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--color-resonance)] shrink-0 mr-3" />
+                  <span>専用フォームからの優先サポート</span>
+                </li>
+              </ul>
+              <div className="mt-6 pt-6 border-t border-gray-100 italic">
+                <p className="text-[10px] text-gray-400 text-center md:text-left leading-tight">
+                  ※サーバーやドメインの契約更新、大規模なデザイン変更、システム障害の復旧対応は含まれません。
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
