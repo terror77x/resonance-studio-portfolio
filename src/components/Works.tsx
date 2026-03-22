@@ -32,6 +32,13 @@ export default function Works() {
               description: "ターゲットの心に寄り添うエモーショナルなコピーライティングと、清潔感あふれる洗練されたUIデザインを最速で実装したデモサイトです。",
               image: "/works/luminous.png",
               link: "https://demo01.resonance-studio.net/"
+            },
+            {
+              title: "Cafe & Roastery LUA（デモサイト）",
+              category: "カフェ・飲食店向け",
+              description: "「温もり、洗練、リラックス」をテーマに、自家焙煎コーヒーの豊かな香りとお店の心地よい空間を伝える、飲食店様向けの洗練されたデモサイトです。",
+              image: "/works/lua.png",
+              link: "https://demo02.resonance-studio.net/"
             }
           ].map((work, index) => (
             <motion.div
