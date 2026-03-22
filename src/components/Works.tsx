@@ -84,6 +84,8 @@ export default function Works() {
                 <div className="pt-4">
                   <a
                     href={work.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-navy)] text-white font-bold rounded-2xl hover:bg-[var(--color-resonance)] hover:text-[var(--color-navy)] transition-all duration-300 group/btn"
                   >
                     <span>デモサイトを見る</span>
