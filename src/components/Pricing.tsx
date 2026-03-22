@@ -154,6 +154,17 @@ export default function Pricing() {
                 <span>テキストベース＋必要に応じたオンラインすり合わせ</span>
               </li>
             </ul>
+
+            <motion.a
+              href="https://forms.gle/FVd6uzJBKuy62YYSA"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="block w-full py-4 px-6 bg-[var(--color-resonance)] text-[var(--color-navy)] text-center font-bold rounded-xl shadow-[0_10px_20px_-10px_rgba(230,126,34,0.5)] hover:shadow-[0_15px_30px_-10px_rgba(230,126,34,0.6)] transition-all duration-300"
+            >
+              Premium専用ご相談フォームへ
+            </motion.a>
           </motion.div>
         </motion.div>
 
