@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance Studio | 研ぎ澄まされた共鳴を。</title>
+    <meta name="description" content="忙しいビジネスパーソンのための少数精鋭WEB制作スタジオ。洗練されたデザインを最短3日でご提供します。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#FAF9F6',
+                        ink: '#1A1A1A',
+                        accent: '#1E3A8A',
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.15em',
+                        superwide: '.25em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS (Textures & Animations) -->
+    <style>
+        body {
+            background-color: #FAF9F6;
+            color: #1A1A1A;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Noise Texture: Adjusted to 0.04 opacity for readability */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Diagonal Fade-in Animation */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Outline forms */
+        .outline-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(26, 26, 26, 0.1);
+            border-radius: 0;
+            padding: 0.75rem 0;
+            transition: border-color 0.4s ease;
+        }
+
+        .outline-input:focus {
+            outline: none;
+            border-bottom-color: #1E3A8A;
+        }
+
+        /* Link hover underline */
+        .hover-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1.5px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Modal Animations & Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-container {
+            position: relative;
+            background: #FAF9F6;
+            width: 90%;
+            max-width: 600px;
+            padding: 4rem 3rem;
+            transform: translateY(30px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid rgba(26, 26, 26, 0.05);
+        }
+
+        .modal.active .modal-container {
+            transform: translateY(0);
+        }
+
+        /* Close Button styling */
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-accent selection:text-base font-sans">
+
+    <!-- Subtle Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 py-6 px-6 md:px-12 backdrop-blur-sm bg-base/30 border-b border-ink/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-serif text-lg tracking-widest font-semibold text-ink">Resonance Studio</div>
+            <a href="#contact"
+                class="hidden md:block font-serif text-sm tracking-widest text-ink hover-underline">無料相談はこちら</a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- セクション1: ヒーローセクション -->
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-48 max-w-7xl mx-auto">
+            <div class="fade-in-up max-w-5xl">
+                <h1 class="font-serif font-medium text-ink leading-tight mb-16">
+                    <span class="block text-3xl md:text-5xl lg:text-6xl tracking-widest mb-4">あなたのビジネスに、</span>
+                    <span
+                        class="block text-3xl md:text-5xl lg:text-6xl tracking-widest md:ml-12 lg:ml-24">研ぎ澄まされた共鳴を。</span>
+                </h1>
+
+                <h2
+                    class="text-xl md:text-2xl lg:text-3xl tracking-wide text-ink font-normal mb-20 md:ml-24 border-l-4 border-accent pl-10 py-2">
+                    最高品質のWEBサイトを、<br>驚異的なスピードで。
+                </h2>
+
+                <div class="flex flex-col md:flex-row md:items-center justify-between md:ml-24 gap-12">
+                    <p class="text-base md:text-lg text-ink font-normal leading-relaxed max-w-2xl tracking-normal">
+                        Resonance Studioは、<br>忙しいビジネスパーソンのための、少数精鋭の制作スタジオです。<br
+                            class="hidden md:block">最新トレンドを反映し、細部まで手作業で仕上げた<br>洗練されたデザインを、最短3日で提供します。
+                    </p>
+
+                    <a href="#contact"
+                        class="group inline-flex items-center text-accent tracking-widest font-serif text-2xl font-semibold hover-underline pb-1 transition-all">
+                        無料で相談する
+                        <span
+                            class="ml-6 tracking-normal transition-transform duration-500 group-hover:translate-x-3">―――</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション2: 現状の課題 -->
+        <section class="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-ink/10">
+            <div class="md:grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5 fade-in-up mb-24 md:mb-0">
+                    <h2 class="font-serif text-3xl md:text-5xl tracking-widest font-medium text-ink leading-tight">
+                        こんなお悩みは<br>ありませんか？
+                    </h2>
+                </div>
+
+                <div class="md:col-span-7 flex flex-col space-y-12">
+                    <div class="fade-in-up flex items-start gap-8 group">
+                        <span
+                            class="font-serif text-5xl md:text-7xl text-ink/5 leading-none group-hover:text-ink/10 transition-colors pointer-events-none select-none">01</span>
+                        <p class="text-lg md:text-2xl font-medium tracking-normal pt-4">WEBサイトが欲しいが、時間がない。</p>
+                    </div>
+                    <div class="fade-in-up flex items-start gap-8 group">
+                        <span
+                            class="font-serif text-5xl md:text-7xl text-ink/5 leading-none group-hover:text-ink/10 transition-colors pointer-events-none select-none">02</span>
+                        <p class="text-lg md:text-2xl font-medium tracking-normal pt-4">制作会社との打ち合わせや、<br>修正のやり取りが面倒。</p>
+                    </div>
+                    <div class="fade-in-up flex items-start gap-8 group">
+                        <span
+                            class="font-serif text-5xl md:text-7xl text-ink/5 leading-none group-hover:text-ink/10 transition-colors pointer-events-none select-none">03</span>
+                        <p class="text-lg md:text-2xl font-medium tracking-normal pt-4">最新のトレンドや、高いクオリティが欲しいが、<br>予算が……。
+                        </p>
+                    </div>
+                    <div class="fade-in-up flex items-start gap-8 group">
+                        <span
+                            class="font-serif text-5xl md:text-7xl text-ink/5 leading-none group-hover:text-ink/10 transition-colors pointer-events-none select-none">04</span>
+                        <p class="text-lg md:text-2xl font-medium tracking-normal pt-4">AIで作ったような、無機質なサイトは欲しくない。</p>
+                    </div>
+                    <div class="fade-in-up flex items-start gap-8 group">
+                        <span
+                            class="font-serif text-5xl md:text-7xl text-ink/5 leading-none group-hover:text-ink/10 transition-colors pointer-events-none select-none">05</span>
+                        <p class="text-lg md:text-2xl font-medium tracking-normal pt-4">急ぎで公開したい案件がある。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション3: 私たちが選ばれる理由 -->
+        <section class="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-ink/10">
+            <h2 class="font-serif text-3xl md:text-5xl tracking-widest font-medium text-center mb-32 fade-in-up">
+                Resonance Studioが、<br class="md:hidden">すべて解決します。
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-16 md:gap-12">
+                <div class="fade-in-up relative group">
+                    <div
+                        class="font-serif text-9xl text-ink/5 absolute -top-16 -left-6 select-none pointer-events-none">
+                        1</div>
+                    <div class="relative z-10">
+                        <h3
+                            class="font-serif text-2xl font-bold tracking-widest mb-8 border-b-2 border-ink inline-block pb-1">
+                            圧倒的なスピード</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            LPなら最短3日。<br>コーポレートサイトなら最短2週間。<br>私たちの独自に最適化された制作フローが、<br>業界標準を打ち破るスピード感を実現します。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up relative group" style="transition-delay: 100ms;">
+                    <div
+                        class="font-serif text-9xl text-accent/5 absolute -top-16 -left-6 select-none pointer-events-none">
+                        2</div>
+                    <div class="relative z-10">
+                        <h3
+                            class="font-serif text-2xl font-bold tracking-widest mb-8 border-b-2 border-accent text-accent inline-block pb-1">
+                            人間の手触り</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            細部までプロフェッショナルの人間の手によって調整された、温かみと洗練さを両立したデザインを提供します。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fade-in-up relative group" style="transition-delay: 200ms;">
+                    <div
+                        class="font-serif text-9xl text-ink/5 absolute -top-16 -left-6 select-none pointer-events-none">
+                        3</div>
+                    <div class="relative z-10">
+                        <h3
+                            class="font-serif text-2xl font-bold tracking-widest mb-8 border-b-2 border-ink inline-block pb-1">
+                            ストレスフリー</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            基本はテキスト完結。<br>忙しいあなたの時間を奪いません。<br>ご希望があれば対面やWEB会議も<br>喜んでお受けします。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション4: サービス・料金パッケージ -->
+        <section class="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-ink/10 relative">
+            <h2 class="font-serif text-3xl md:text-5xl tracking-widest font-medium mb-32 fade-in-up">
+                わかりやすい。<br>適正な価格設定。
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12 md:gap-24 items-start pb-24">
+                <!-- Package 1 -->
+                <div class="fade-in-up bg-white p-12 md:p-16 border border-ink/5 shadow-sm">
+                    <h3 class="font-serif text-xl tracking-widest mb-8 text-ink/40 uppercase font-bold">Speed LP Pack
+                    </h3>
+                    <p class="font-serif text-3xl font-semibold mb-12">スピードLPパック</p>
+                    <div class="font-serif text-5xl font-bold text-accent mb-12">
+                        98,000<span class="text-xl text-ink/40 ml-2 font-normal font-sans">円〜</span>
+                    </div>
+                    <p class="text-ink font-normal tracking-normal leading-relaxed mb-12">
+                        新商品、キャンペーン、イベント。<br>目的が明確な単一ページの制作。<br>最短3日で納品します。
+                    </p>
+                    <div class="h-px bg-ink/10 mb-8"></div>
+                    <ul class="space-y-4 text-sm font-medium tracking-wide text-ink/60">
+                        <li>・オリジナル構成・デザイン</li>
+                        <li>・スマートフォン完全対応</li>
+                    </ul>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="fade-in-up bg-accent text-base p-12 md:p-16 shadow-2xl md:translate-y-24">
+                    <h3 class="font-serif text-xl tracking-widest mb-8 text-base/40 uppercase font-bold">Corporate Pack
+                    </h3>
+                    <p class="font-serif text-3xl font-semibold mb-12">スタンダード・コーポレート</p>
+                    <div class="font-serif text-5xl font-bold text-white mb-12">
+                        250,000<span class="text-xl text-base/40 ml-2 font-normal font-sans">円〜</span>
+                    </div>
+                    <p class="text-base font-normal tracking-normal leading-relaxed mb-12">
+                        会社概要、サービス紹介など。<br>企業の信頼性を高める標準的なサイト。<br>最短2週間〜3週間で納品します。
+                    </p>
+                    <div class="h-px bg-base/20 mb-8"></div>
+                    <ul class="space-y-4 text-sm font-medium tracking-wide text-base/60">
+                        <li>・独自デザイン＋複数ページ</li>
+                        <li>・お問合せフォーム実装</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-32 max-w-3xl fade-in-up bg-base border-l-8 border-accent p-12 md:ml-auto">
+                <p class="font-serif text-2xl font-bold tracking-widest text-accent mb-6">💡 テキスト完結・おまかせ割引</p>
+                <p class="text-ink font-medium tracking-normal leading-relaxed">
+                    WEB会議を行わず、ヒアリングシートとテキストのやり取りのみで制作を進行する場合、<br>総額から<span
+                        class="font-bold border-b-2 border-accent">10%割引</span>いたします。
+                </p>
+            </div>
+        </section>
+
+        <!-- セクション5: 制作の流れ -->
+        <section class="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-ink/10">
+            <div class="md:grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5 fade-in-up mb-24 md:mb-0">
+                    <h2 class="font-serif text-3xl md:text-5xl tracking-widest font-medium">シンプル。<br>だから、速い。</h2>
+                </div>
+
+                <div class="md:col-span-7 flex flex-col space-y-20 md:pl-16">
+                    <div class="fade-in-up relative pl-20">
+                        <div class="absolute left-0 top-0 font-serif text-4xl text-accent font-bold opacity-10">01</div>
+                        <h3 class="font-serif text-2xl font-bold tracking-widest mb-6">お問合せ</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            ヒアリングシートにご記入いただきます。<br>現状の課題や目標、理想のイメージを言語化します。</p>
+                    </div>
+
+                    <div class="fade-in-up relative pl-20">
+                        <div class="absolute left-0 top-0 font-serif text-4xl text-accent font-bold opacity-10">02</div>
+                        <h3
+                            class="font-serif text-2xl font-bold tracking-widest mb-6 border-b-2 border-accent/20 inline-block pb-1">
+                            ご提案・決定</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            構成とデザインの方向性を決定します。<br>プロの視点から最短・最適のルートを提示します。</p>
+                    </div>
+
+                    <div class="fade-in-up relative pl-20">
+                        <div class="absolute left-0 top-0 font-serif text-4xl text-accent font-bold">03</div>
+                        <h3 class="font-serif text-2xl font-bold tracking-widest mb-6 text-accent">実装・公開</h3>
+                        <p class="text-ink font-normal tracking-normal leading-relaxed">
+                            最短スケジュールでサイトを構築し、納品を行います。<br>公開作業や運用相談も承ります。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション6: よくある質問 -->
+        <section class="py-32 px-6 md:px-12 md:py-48 max-w-7xl mx-auto border-t border-ink/10">
+            <h2 class="font-serif text-4xl tracking-widest font-medium mb-32 fade-in-up">FAQ</h2>
+
+            <div class="grid md:grid-cols-2 gap-16 md:gap-24">
+                <div class="fade-in-up">
+                    <div class="font-serif text-sm tracking-widest text-accent font-bold uppercase mb-4">Meeting Inquiry
+                    </div>
+                    <h3 class="text-2xl font-bold mb-8">本当にWEB会議なしで作れますか？</h3>
+                    <p class="text-ink font-normal tracking-normal leading-relaxed">
+                        はい、可能です。<br>詳細なヒアリングシートをご用意しておりますので、<br>そちらにご記入いただければ、最適な形をご提案します。</p>
+                </div>
+
+                <div class="fade-in-up" style="transition-delay: 100ms;">
+                    <div class="font-serif text-sm tracking-widest text-accent font-bold uppercase mb-4">Trend Focus
+                    </div>
+                    <h3 class="text-2xl font-bold mb-8">どのようなトレンドに対応していますか？</h3>
+                    <p class="text-ink font-normal tracking-normal leading-relaxed">
+                        世界中の最新WEBデザイントレンドを常に分析しています。<br>あなたのビジネスに最適な、洗練されたUI/UXをご提案します。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション7: お問合せ -->
+        <section id="contact" class="py-32 px-6 md:px-12 md:py-48 max-w-7xl mx-auto border-t border-ink/10">
+            <div class="md:grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5 fade-in-up mb-24 md:mb-0">
+                    <h2
+                        class="font-serif text-3xl md:text-[46px] lg:text-[52px] tracking-widest font-medium leading-tight mb-12">
+                        まずは、<br>あなたの想いを<br>聞かせてください。
+                    </h2>
+                    <p class="text-ink/60 font-semibold tracking-wide">ご相談・お見積りは無料です。</p>
+                </div>
+
+                <div class="md:col-span-7 md:pl-16 fade-in-up">
+                    <div id="contact-wrapper" class="relative">
+                        <form id="contact-form" class="space-y-12 transition-opacity duration-700" action="https://formspree.io/f/xvzvyvvq" method="POST">
+                            <div>
+                                <input type="text" id="name" name="name"
+                                    class="outline-input w-full text-xl font-medium placeholder-ink/20" placeholder="氏名／会社名"
+                                    required>
+                            </div>
+                            <div>
+                                <input type="email" id="email" name="email"
+                                    class="outline-input w-full text-xl font-medium placeholder-ink/20"
+                                    placeholder="メールアドレス" required>
+                            </div>
+                            <div>
+                                <textarea id="message" name="message" rows="1"
+                                    class="outline-input w-full text-xl font-medium placeholder-ink/20 resize-none overflow-hidden"
+                                    placeholder="ご相談内容" required
+                                    oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"></textarea>
+                            </div>
+
+                            <div class="pt-12">
+                                <button type="submit" id="submit-button"
+                                    class="group inline-flex items-center text-accent tracking-widest font-serif text-3xl font-bold hover-underline pb-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <span id="submit-text">無料で相談する</span>
+                                    <span id="submit-arrow"
+                                        class="ml-10 tracking-normal transition-transform duration-500 group-hover:translate-x-6">―――</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="contact-success" class="hidden opacity-0 transition-opacity duration-1000 py-12">
+                            <h3 class="font-serif text-2xl md:text-3xl tracking-widest text-ink mb-8 leading-tight">メッセージを送信しました。</h3>
+                            <p class="text-ink/80 leading-relaxed font-medium">
+                                お問い合わせ誠にありがとうございます。<br>
+                                内容を確認の上、通常2営業日以内に担当者よりご連絡いたします。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- セクション8: フッター -->
+    <footer class="relative z-10 border-t border-ink/10 py-24 px-6 md:px-12 bg-white/40">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
+            <div class="font-serif text-2xl tracking-superwide font-bold text-ink">Resonance Studio</div>
+            <div class="flex flex-wrap justify-center gap-12 text-sm font-bold tracking-widest text-ink/40 uppercase">
+                <button onclick="openModal('modal-about')" class="hover:text-ink transition-colors">About</button>
+                <button onclick="openModal('modal-privacy')" class="hover:text-ink transition-colors">Privacy
+                    Policy</button>
+                <button onclick="openModal('modal-terms')" class="hover:text-ink transition-colors">Terms</button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto text-center mt-20 text-[10px] tracking-[0.4em] font-bold uppercase text-ink/30">
+            &copy; 2026 Resonance Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- About Modal -->
+    <div id="modal-about" class="modal">
+        <div class="modal-overlay" onclick="closeModal('modal-about')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal('modal-about')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="font-serif text-3xl font-bold tracking-widest mb-10 border-b border-ink/10 pb-4">会社概要</h2>
+            <div class="space-y-6 text-ink/80">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="font-bold opacity-60">屋号</div>
+                    <div class="col-span-2">Resonance Studio</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="font-bold opacity-60">代表</div>
+                    <div class="col-span-2">[代表者名]</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="font-bold opacity-60">所在地</div>
+                    <div class="col-span-2">[都道府県市区町村]</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="font-bold opacity-60">事業内容</div>
+                    <div class="col-span-2">WEBサイト制作、UI/UXデザイン</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="font-bold opacity-60">お問い合わせ</div>
+                    <div class="col-span-2">info@example.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="modal-privacy" class="modal">
+        <div class="modal-overlay" onclick="closeModal('modal-privacy')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal('modal-privacy')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="font-serif text-3xl font-bold tracking-widest mb-10 border-b border-ink/10 pb-4">プライバシーポリシー</h2>
+            <div class="space-y-8 text-ink/80 leading-relaxed">
+                <div>
+                    <h3 class="font-bold text-ink mb-3 tracking-wide">1. 個人情報の取得</h3>
+                    <p>当スタジオは、お問い合わせフォームより、氏名、メールアドレス等の個人情報を取得いたします。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-ink mb-3 tracking-wide">2. 利用目的</h3>
+                    <p>取得した個人情報は、お問い合わせへの回答および業務遂行のためにのみ利用し、目的外の利用はいたしません。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-ink mb-3 tracking-wide">3. 第三者提供</h3>
+                    <p>法令に基づく場合を除き、お客様の同意なく第三者に個人情報を提供することはありません。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="modal-terms" class="modal">
+        <div class="modal-overlay" onclick="closeModal('modal-terms')"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal('modal-terms')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h2 class="font-serif text-3xl font-bold tracking-widest mb-10 border-b border-ink/10 pb-4">特定商取引法に基づく表記
+            </h2>
+            <div class="space-y-6 text-ink/80">
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="font-bold opacity-60">事業者</div>
+                    <div class="col-span-3">Resonance Studio</div>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="font-bold opacity-60">代表者</div>
+                    <div class="col-span-3">[代表者名]</div>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="font-bold opacity-60">所在地</div>
+                    <div class="col-span-3">[都道府県市区町村]</div>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="font-bold opacity-60">お支払方法</div>
+                    <div class="col-span-3">銀行振込</div>
+                </div>
+                <div class="pt-4 space-y-4">
+                    <div>
+                        <h3 class="font-bold text-ink mb-1">サービスの引渡時期</h3>
+                        <p>契約時に定めるスケジュールに準じます。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-ink mb-1">キャンセル・返品について</h3>
+                        <p>デジタルコンテンツの特性上、制作着手後のキャンセルおよび返品はお受けできません。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS for Modals & Intersection Observer -->
+    <script>
+        // Modal functions
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) closeModal(activeModal.id);
+            }
+        });
+
+        // Contact Form AJAX Submission
+        const contactForm = document.getElementById('contact-form');
+        const contactSuccess = document.getElementById('contact-success');
+        const submitButton = document.getElementById('submit-button');
+        const submitText = document.getElementById('submit-text');
+        const submitArrow = document.getElementById('submit-arrow');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Loading State
+                submitButton.disabled = true;
+                submitText.innerText = '送信中...';
+                submitArrow.style.opacity = '0';
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Success Transition
+                        contactForm.classList.add('opacity-0');
+                        setTimeout(() => {
+                            contactForm.classList.add('hidden');
+                            contactSuccess.classList.remove('hidden');
+                            // Small delay for the opacity transition to kick in
+                            requestAnimationFrame(() => {
+                                contactSuccess.classList.add('opacity-100');
+                            });
+                        }, 700);
+                    } else {
+                        const data = await response.json();
+                        throw new Error(data.error || 'Submission failed');
+                    }
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    alert('送信に失敗しました。お手数ですが、通信環境をご確認の上、再度お試しいただくか、直接メールにてご連絡ください。');
+                    
+                    // Reset Button State
+                    submitButton.disabled = false;
+                    submitText.innerText = '無料で相談する';
+                    submitArrow.style.opacity = '1';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -100px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+
+</html>
